@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Vue 3 | Computed and Watcher</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <style>
+      body {
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .example {
+        border-bottom: 1px solid black;
+        padding: 1em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Computed and Watcher</h1>
+    <div class="example">
+      <h2>Watcher</h2>
+      <div id="watcher">
+        <p>
+          Ask a yes/no questions
+          <input type="text" v-model="question" />
+        </p>
+        <p>Answer: {{answer}}</p>
+      </div>
+      <script>
+        const Watcher = {
+          data() {
+            return {
+              question: "",
+              answer: "Enter the question first",
+            };
+          },
+          watch: {
+            question(entered, old) {
+              if (entered.indexOf("?") > -1) {
+                this.getAnswer();
+              }
+            },
+          },
+
+          methods: {
+            getAnswer() {
+              this.answer = "Thinking...";
+              axios
+                .get("https://yesno.wtf/api")
+                .then((res) => {
+                  this.answer = res.data.answer;
+                })
+                .catch((err) => {
+                  this.answer = "Error! " + err.message;
+                });
+            },
+          },
+        };
+
+        Vue.createApp(Watcher).mount("#watcher");
+      </script>
+    </div>
+  </body>
+</html>
