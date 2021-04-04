@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Vue 3 | Template syntax</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+      body {
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .example {
+        border-bottom: 1px solid black;
+        padding: 1em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Template syntax</h1>
+    <div class="example">
+      <h2>Raw HTML</h2>
+      <div id="raw-html">
+        <p>Using mustaches: {{ rawHtml }}</p>
+        <p>Using v-html: <span v-html="rawHtml"></span></p>
+      </div>
+      <script>
+        const RawHtml = {
+          data() {
+            return {
+              rawHtml: `<strong style="color:green">Hello world!</strong>`,
+            };
+          },
+        };
+
+        Vue.createApp(RawHtml).mount("#raw-html");
+      </script>
+    </div>
+
+    <div class="example">
+      <h2>Have fun with methods</h2>
+      <div id="methods">
+        <p>
+          We can use method from the <code>data</code> property. But the value
+          of <code>this</code> is different, as Vue auto bind all function in
+          <code>methods</code>
+        </p>
+        <button @click="dataClick">Click from data, check the console</button>
+        <br />
+        <button @click="methodClick">
+          Click from methods, check the console
+        </button>
+        <br />
+        <button @click="componentClick">
+          Click from custom component instance
+        </button>
+      </div>
+      <script>
+        const click = (where, obj) => {
+          console.log(`From ${where} property, this is`, obj);
+          console.log("data:", obj.data);
+          console.log("methods:", obj.methods);
+        };
+
+        const Method = {
+          data() {
+            return {
+              dataClick() {
+                click("data", this);
+              },
+            };
+          },
+
+          methods: {
+            methodClick() {
+              click("method", this);
+            },
+          },
+          created() {
+            this.componentClick = () => click("component", this);
+          },
+        };
+
+        let app = Vue.createApp(Method);
+        app.mount("#methods");
+      </script>
+    </div>
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Vue 3 Hello world</title>
+    <title>Vue 3 | Intro</title>
     <script src="https://unpkg.com/vue@3"></script>
     <style>
       body {
@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <h1>Vue examples</h1>
+    <h1>Introduction</h1>
     <div class="example">
       <h2>Counter</h2>
       <div id="counter">Counter: {{ count }}</div>
@@ -198,7 +198,7 @@
         app = Vue.createApp(TodoList);
         app.component("todo-item", {
           props: ["todo"],
-          template: `<li>{{todo.text}}</li>`,
+          template: `<li>{{ todo.text }}</li>`,
         });
         app.mount("#todo-list-app");
       </script>
