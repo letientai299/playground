@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Birthday</string>
+    <string name="happy_birthday">Happy birthday Shopee</string>
+    <string name="from">From Tai</string>
+    <string name="birthday_image_desc">Birthday image background</string>
+    <string name="dice_button">Roll</string>
+    <string name="dice_img_desc">Dice</string>
+    <string name="tip_cost">Cost of service</string>
+    <string name="desc_label_tip_cost">Label for tip cost input</string>
+    <string name="tip_option_20">Amazing (20%)</string>
+    <string name="tip_option_18">Good (18%)</string>
+    <string name="tip_option_15">Okay (15%)</string>
+    <string name="tip_round_up">Round up tip?</string>
+    <string name="tip_button_calc">Calculate</string>
+    <string name="tip_amount">Tip Amount: %s</string>
+    <string name="next_screen">Next Screen</string>
+    <string name="tip_option_questions">How was the service?</string>
+</resources>

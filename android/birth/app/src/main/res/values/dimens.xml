@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tip_cost_min_width">160dp</dimen>
+    <dimen name="margin">16dp</dimen>
+    <dimen name="text">24sp</dimen>
+    <dimen name="dice_size">320dp</dimen>
+</resources>
