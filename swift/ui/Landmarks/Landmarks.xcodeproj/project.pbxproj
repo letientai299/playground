@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0471C64C264788C200986CC9 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0471C64B264788C200986CC9 /* CircleImage.swift */; };
+		0471C65126478ABF00986CC9 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0471C65026478ABF00986CC9 /* MapView.swift */; };
 		04BFB0DB26477B6400C1C649 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFB0DA26477B6400C1C649 /* AppDelegate.swift */; };
 		04BFB0DD26477B6400C1C649 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFB0DC26477B6400C1C649 /* ContentView.swift */; };
 		04BFB0DF26477B6600C1C649 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04BFB0DE26477B6600C1C649 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		0471C64B264788C200986CC9 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		0471C65026478ABF00986CC9 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		04BFB0D726477B6400C1C649 /* Landmarks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Landmarks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04BFB0DA26477B6400C1C649 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04BFB0DC26477B6400C1C649 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				04BFB0E726477B6600C1C649 /* Landmarks.entitlements */,
 				04BFB0E026477B6600C1C649 /* Preview Content */,
 				0471C64B264788C200986CC9 /* CircleImage.swift */,
+				0471C65026478ABF00986CC9 /* MapView.swift */,
 			);
 			path = Landmarks;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04BFB0DD26477B6400C1C649 /* ContentView.swift in Sources */,
+				0471C65126478ABF00986CC9 /* MapView.swift in Sources */,
 				04BFB0DB26477B6400C1C649 /* AppDelegate.swift in Sources */,
 				0471C64C264788C200986CC9 /* CircleImage.swift in Sources */,
 			);
