@@ -1,1 +1,3 @@
 xcuserdata
+dart/*/coverage
+flutter/*/coverage
