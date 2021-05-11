@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 
-import 'all_test.dart';
+import 'intro.dart';
 
 void main() {
   test('intro', intro);
