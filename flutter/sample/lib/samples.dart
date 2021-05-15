@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sample/startup_name/app.dart' as startupName;
-import 'package:sample/app_1/app.dart' as app1;
+import 'package:sample/layout_tutorial/app.dart' as layoutTutorial;
 
 List<Sample> samples() {
   return [
     Sample('Startup Name', startupName.App()),
-    Sample('App 1', app1.App()),
+    Sample('Layout Tutorial', layoutTutorial.App()),
   ];
 }
 
