@@ -1,60 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:sample/samples.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(
+    MaterialApp(
       home: Scaffold(
-    body: Center(child: Counter()),
-  )));
+        appBar: AppBar(title: Text("Samples")),
+        body: SampleList(),
+      ),
+    ),
+  );
 }
 
-class CounterDisplay extends StatelessWidget {
-  CounterDisplay({this.count});
+class SampleList extends StatefulWidget {
+  @override
+  _SampleListState createState() => _SampleListState();
+}
 
-  final int count;
-
+class _SampleListState extends State<SampleList> {
   @override
   Widget build(BuildContext context) {
-    return Text('Count: $count');
-  }
-}
-
-class CounterIncrementor extends StatelessWidget {
-  CounterIncrementor({this.onPressed});
-
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      child: Text('Increment'),
-    );
-  }
-}
-
-class Counter extends StatefulWidget {
-  @override
-  _CounterState createState() => _CounterState();
-}
-
-class _CounterState extends State<Counter> {
-  int _counter = 0;
-
-  void _increment() {
-    setState(() {
-      ++_counter;
-    });
+    return ListView(children: _children());
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        CounterIncrementor(onPressed: _increment),
-        SizedBox(width: 16),
-        CounterDisplay(count: _counter),
-      ],
-    );
+  List<Widget> _children() {
+    var samples = _sampleAppTiles();
+    return ListTile.divideTiles(tiles: samples, context: context).toList();
+  }
+
+  List<Widget> _sampleAppTiles() {
+    return samples()
+        .map((e) => ListTile(title: Text(e.name), onTap: () => _open(e.app)))
+        .toList();
+  }
+
+  void _open(Widget app) {
+    var nav = Navigator.of(context);
+    nav.push(MaterialPageRoute(builder: (context) {
+      return app;
+    }));
   }
 }
