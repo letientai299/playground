@@ -45,6 +45,12 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+
+            // Currently, release build using flutter_blue has some issue with R8, thus, we need to
+            // disable code minification features to make it works.
+            // https://github.com/pauldemarco/flutter_blue/issues/772#issuecomment-827404250
+            shrinkResources false
+            minifyEnabled false
         }
     }
 }
