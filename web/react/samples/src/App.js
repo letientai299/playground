@@ -1,11 +1,17 @@
 import "./App.css";
+import Clock from "./clock/Clock";
 
-function App() {
+const App = () => {
+  const components = [<Clock />];
   return (
-    <div className="App">
-      <header className="App-header">Learn React</header>
+    <div>
+      {components.map((c) => (
+        <div key={c.type} className="sample-component">
+          {c}
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default App;
