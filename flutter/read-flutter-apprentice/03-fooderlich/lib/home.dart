@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'card1.dart';
+import 'card2.dart';
+import 'card3.dart';
+
 class Home extends StatefulWidget {
   const Home({
     Key? key,
@@ -10,7 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +30,15 @@ class _HomeState extends State<Home> {
         items: <BottomNavigationBarItem>[
           const BottomNavigationBarItem(
             icon: Icon(Icons.card_giftcard),
-            label: 'Card',
+            label: 'Card 1',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.card_giftcard),
-            label: 'Card2',
+            label: 'Card 2',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.card_giftcard),
-            label: 'Card3',
+            label: 'Card 3',
           ),
         ],
         currentIndex: _selectedIndex,
@@ -46,8 +50,8 @@ class _HomeState extends State<Home> {
   }
 
   static List<Widget> pages = <Widget>[
-    Container(color: Colors.red),
-    Container(color: Colors.green),
-    Container(color: Colors.blue),
+    const Card1(),
+    const Card2(),
+    const Card3(),
   ];
 }
