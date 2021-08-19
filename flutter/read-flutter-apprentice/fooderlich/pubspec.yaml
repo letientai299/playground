@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^2.1.0
+  provider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +24,4 @@ flutter:
     - assets/food_pics/
     - assets/profile_pics/
     - assets/sample_data/
-
-
-
+    - assets/fooderlich_assets/
