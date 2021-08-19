@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/api/mock_fooderlich_service.dart';
+import 'package:fooderlich/components/friend_post_list_view.dart';
+import 'package:fooderlich/components/today_recipe_list_view.dart';
 import 'package:fooderlich/models/explore_data.dart';
 
 class ExploreScreen extends StatelessWidget {
@@ -16,11 +18,14 @@ class ExploreScreen extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-        final recipes = (snapshot.data as ExploreData).todayRecipes;
-        return Center(
-          child: Container(
-            child: Text('Show ${recipes.length} recipes'),
-          ),
+        final data = snapshot.data as ExploreData;
+        return ListView(
+          scrollDirection: Axis.vertical,
+          children: [
+            TodayRecipeListView(recipes: data.todayRecipes),
+            const SizedBox(height: 16),
+            FriendPostListView(posts: data.friendPosts),
+          ],
         );
       },
     );
