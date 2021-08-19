@@ -15,7 +15,7 @@ class Card3 extends StatelessWidget {
         constraints: const BoxConstraints.expand(width: 350, height: 450),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/mag2.png'),
+            image: AssetImage('assets/mag3.png'),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -51,6 +51,7 @@ class Card3 extends StatelessWidget {
 
   List<Widget> makeChips(TextTheme textTheme) {
     final rand = math.Random();
+
     return [
       'Sashimi',
       'Sushi',
