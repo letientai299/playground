@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/models/explore_recipe.dart';
 
 import 'components/components.dart';
 
@@ -48,8 +49,42 @@ class _HomeState extends State<Home> {
   }
 
   static List<Widget> pages = <Widget>[
-    const Card1(),
-    const Card2(),
-    const Card3(),
+    Card1(
+      recipe: ExploreRecipe(
+        authorName: 'Ray Wenderlich',
+        title: 'The Art of Dough',
+        subtitle: "Editor's Choice",
+        message: 'Learn to make the perfect bread',
+        backgroundImage: 'assets/magazine_pics/card_bread.jpg',
+      ),
+    ),
+    Card2(
+      recipe: ExploreRecipe(
+        authorName: 'Mike Katz',
+        role: 'Smoothie Connoisseur',
+        profileImage: 'assets/profile_pics/person_katz.jpeg',
+        title: 'Recipe',
+        subtitle: 'Smoothies',
+        backgroundImage: 'assets/magazine_pics/mag2.png',
+      ),
+    ),
+    Card3(
+      recipe: ExploreRecipe(
+        title: 'Vegan Trends',
+        tags: [
+          'Healthy',
+          'Vegan',
+          'Carrots',
+          'Greens',
+          'Wheat',
+          'Pescetarian',
+          'Mint',
+          'Lemongrass',
+          'Salad',
+          'Water'
+        ],
+        backgroundImage: 'assets/magazine_pics/mag3.png',
+      ),
+    ),
   ];
 }

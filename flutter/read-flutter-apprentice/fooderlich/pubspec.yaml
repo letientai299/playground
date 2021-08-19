@@ -19,6 +19,10 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/magazine_pics/
+    - assets/food_pics/
+    - assets/profile_pics/
+    - assets/sample_data/
 
 
 
