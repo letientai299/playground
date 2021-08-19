@@ -12,25 +12,27 @@ class MockFooderlichService {
 
   Future<List<SimpleRecipe>> getRecipes() async {
     final json = await _loadJson('assets/sample_data/sample_recipes.json');
-    return json['recipes']?.map(SimpleRecipe.parseJson).toList();
+    return json['recipes']?.map((e) => SimpleRecipe.fromJson(e)).toList();
   }
 
   Future<List<ExploreRecipe>> _getTodayRecipes() async {
     final json = await _loadJson(
       'assets/sample_data/sample_explore_recipes.json',
     );
-    return json['recipes']?.map(ExploreRecipe.parseJson).toList();
+
+    final data = json['recipes'].map((e) => ExploreRecipe.fromJson(e));
+    return List<ExploreRecipe>.from(data);
   }
 
   Future<List<Post>> _getFriendFeed() async {
     final json = await _loadJson(
       'assets/sample_data/sample_friends_feed.json',
     );
-    return json['feed']?.map(Post.parseJson).toList();
+    return List<Post>.from(json['feed'].map((e) => Post.fromJson(e)));
   }
 
   Future<Map<String, dynamic>> _loadJson(String path) async {
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 500));
     final dataString = await _loadAsset(path);
     return jsonDecode(dataString);
   }

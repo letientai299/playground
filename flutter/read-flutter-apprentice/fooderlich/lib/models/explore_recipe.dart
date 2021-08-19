@@ -62,9 +62,10 @@ class ExploreRecipe {
         tags = json['tags'].cast<String>(),
         description = json['description'],
         source = json['source'],
-        ingredients = json['ingredients'].map(Ingredient.parseJson).toList(),
-        instructions = json['instructions'].map(Instruction.parseJson).toList();
-
-  static ExploreRecipe parseJson(Map<String, dynamic> json) =>
-      ExploreRecipe.fromJson(json);
+        ingredients = List<Ingredient>.from(
+          json['ingredients']?.map((e) => Ingredient.fromJson(e)) ?? [],
+        ),
+        instructions = List<Instruction>.from(
+          json['instructions']?.map((e) => Instruction.fromJson(e)) ?? [],
+        );
 }

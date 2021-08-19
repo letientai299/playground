@@ -13,9 +13,6 @@ class SimpleRecipe {
     required this.information,
   });
 
-  static SimpleRecipe parseJson(Map<String, dynamic> json) =>
-      SimpleRecipe.fromJson(json);
-
   SimpleRecipe.fromJson(Map<String, dynamic> json)
       : dishImage = json['dishImage'],
         title = json['title'],

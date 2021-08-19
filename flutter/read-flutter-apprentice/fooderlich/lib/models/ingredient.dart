@@ -15,7 +15,4 @@ class Ingredient {
       : imageUrl = json['imageUrl'],
         title = json['title'],
         source = json['source'];
-
-  static Ingredient parseJson(Map<String, dynamic> json) =>
-      Ingredient.fromJson(json);
 }

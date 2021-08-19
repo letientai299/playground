@@ -11,8 +11,6 @@ class Post {
     required this.timestamp,
   });
 
-  static Post parseJson(Map<String, dynamic> json) => Post.fromJson(json);
-
   Post.fromJson(Map<String, dynamic> json)
       : profileImageUrl = json['profileImageUrl'],
         foodPictureUrl = json['foodPictureUrl'],

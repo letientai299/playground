@@ -15,6 +15,4 @@ class Instruction {
       : imageUrl = json['imageUrl'],
         description = json['description'],
         durationInMinutes = json['durationInMinutes'] ?? 0;
-
-  static parseJson(Map<String, dynamic> json) => Instruction.fromJson(json);
 }
