@@ -72,6 +72,7 @@ class Card3 extends StatelessWidget {
               backgroundColor: Colors.black.withOpacity(0.6),
               onDeleted: rand.nextInt(3) < 1 ? () {} : null,
             ))
-        .toList();
+        .toList()
+          ..shuffle();
   }
 }

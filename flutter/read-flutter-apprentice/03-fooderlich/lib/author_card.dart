@@ -44,7 +44,7 @@ class _AuthorCardState extends State<AuthorCard> {
           Spacer(),
           IconButton(
             iconSize: 30,
-            color: _liked ? Colors.red[400] : Colors.grey[400],
+            color: Colors.red[400],
             icon: Icon(_liked ? Icons.favorite : Icons.favorite_border),
             onPressed: () {
               setState(() {
