@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/components/components.dart';
 import 'package:fooderlich/screens/explore_screen.dart';
 
 class Home extends StatefulWidget {
@@ -11,7 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class _HomeState extends State<Home> {
 
   static List<Widget> pages = <Widget>[
     ExploreScreen(),
-    Container(color: Colors.green),
+    RecipesScreen(),
     Container(color: Colors.red),
   ];
 }

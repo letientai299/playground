@@ -12,7 +12,9 @@ class MockFooderlichService {
 
   Future<List<SimpleRecipe>> getRecipes() async {
     final json = await _loadJson('assets/sample_data/sample_recipes.json');
-    return json['recipes']?.map((e) => SimpleRecipe.fromJson(e)).toList();
+    return List<SimpleRecipe>.from(
+      json['recipes']?.map((e) => SimpleRecipe.fromJson(e)),
+    );
   }
 
   Future<List<ExploreRecipe>> _getTodayRecipes() async {
@@ -32,7 +34,7 @@ class MockFooderlichService {
   }
 
   Future<Map<String, dynamic>> _loadJson(String path) async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 200));
     final dataString = await _loadAsset(path);
     return jsonDecode(dataString);
   }
