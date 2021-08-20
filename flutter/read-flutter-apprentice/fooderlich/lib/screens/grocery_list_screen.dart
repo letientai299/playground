@@ -16,27 +16,45 @@ class GroceryListScreen extends StatelessWidget {
       child: ListView.separated(
         itemBuilder: (context, index) {
           final item = items[index];
-          return InkWell(
-            child: GroceryTile(
-              key: Key(item.id),
-              item: item,
-              onComplete: (change) => manager.completeItem(index, change),
+          return Dismissible(
+            key: Key(item.id),
+            direction: DismissDirection.endToStart,
+            background: Container(
+              color: Colors.red,
+              alignment: Alignment.centerRight,
+              child: const Icon(
+                Icons.delete_forever,
+                color: Colors.white,
+                size: 50,
+              ),
             ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return GroceryItemScreen(
-                    originalItem: item,
-                    onCreate: (item) {},
-                    onUpdate: (item) {
-                      manager.updateItem(item, index);
-                      Navigator.pop(context);
-                    },
-                  );
-                }),
-              );
+            onDismissed: (direction) {
+              manager.deleteItem(index);
+              final bar = SnackBar(content: Text('${item.name} dismissed'));
+              ScaffoldMessenger.of(context).showSnackBar(bar);
             },
+            child: InkWell(
+              child: GroceryTile(
+                key: Key(item.id),
+                item: item,
+                onComplete: (change) => manager.completeItem(index, change),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return GroceryItemScreen(
+                      originalItem: item,
+                      onCreate: (item) {},
+                      onUpdate: (item) {
+                        manager.updateItem(item, index);
+                        Navigator.pop(context);
+                      },
+                    );
+                  }),
+                );
+              },
+            ),
           );
         },
         separatorBuilder: (context, index) => const SizedBox(height: 16),
