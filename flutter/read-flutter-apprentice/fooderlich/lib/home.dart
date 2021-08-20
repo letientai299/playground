@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
           appBar: AppBar(
             title: Text('Fooderlich', style: theme.textTheme.headline6),
           ),
-          body: pages[tabManager.selectedTab],
+          body: IndexedStack(index: tabManager.selectedTab, children: pages),
           bottomNavigationBar: BottomNavigationBar(
             selectedItemColor: theme.textSelectionTheme.selectionColor,
             items: <BottomNavigationBarItem>[
