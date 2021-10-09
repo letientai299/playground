@@ -1,5 +1,8 @@
 # Flutter general notes
 
+- **`IndexedStack` is pretty nice**. It preserves the state of all the widgets
+  it contains.
+
 - On Macos, if iOS build fails with error related to C/C++ import path, check
   for `CPPFLAGS`, `CPATH`, ... variables.
 
@@ -61,3 +64,13 @@ get a `List<Item>`, we must use `List.from()`.
 ```dart
 List<Item> items = List<Item>.from(json['items'].map((e) => Item.fromJson(e)));
 ```
+
+## To learn
+
+- Design
+- Animation
+- Special widgets.
+- Test, integration tests
+- CI/CD
+- Webview
+- Markdown renderer
