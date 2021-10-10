@@ -1,8 +1,14 @@
 import "./App.css";
-import Clock from "./clock/Clock";
+import {Clock} from "./components/Clock";
+import {Counter} from "./components/Counter";
+import {Hello} from "./components/Hello";
 
 const App = () => {
-  const components = [<Clock />];
+  const components = [
+    <Hello name="React"/>,
+    <Clock/>,
+    <Counter start={1} step={1} interval={1}/>,
+  ];
   return (
     <div>
       {components.map((c) => (
