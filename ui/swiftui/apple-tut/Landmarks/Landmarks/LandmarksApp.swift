@@ -6,15 +6,18 @@
 //
 
 import SwiftUI
+import Inject
 
 @main
 struct LandmarksApp: App {
+    @ObservedObject private var iO = Inject.observer
     @StateObject private var modelData = ModelData()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(ModelData())
+                    .environmentObject(ModelData())
+                    .enableInjection()
         }
     }
 }
