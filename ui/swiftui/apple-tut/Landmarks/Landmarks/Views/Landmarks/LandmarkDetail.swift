@@ -1,10 +1,18 @@
 import SwiftUI
 
 struct LandmarkDetail: View {
+    @EnvironmentObject var modelData: ModelData
+
     var landmark: Landmark
 
+    var landmarkIndex: Int {
+        // WTF is this code?
+        // Why need "!"? Why can't I just use the "landmark.isFavorite"
+        modelData.landmarks.firstIndex(where: {$0.id == landmark.id})!
+    }
+
     var body: some View {
-        VStack {
+        ScrollView {
             MapView(coordinate: landmark.locationCoordinates)
                 .ignoresSafeArea(edges: .top)
                 .frame(height: 300)
@@ -14,8 +22,12 @@ struct LandmarkDetail: View {
                 .padding(.bottom, -130)
 
             VStack(alignment: .leading) {
-                Text(landmark.name)
-                    .font(.title)
+                HStack {
+                    Text(landmark.name)
+                        .font(.title)
+                    let lm = $modelData.landmarks[landmarkIndex]
+                    FavoriteButton(isSet: lm.isFavorite)
+                }
 
                 HStack {
                     Text(landmark.park)
@@ -42,7 +54,9 @@ struct LandmarkDetail: View {
 }
 
 struct LandmarkDetail_Previews: PreviewProvider {
+    static let modelData = ModelData()
     static var previews: some View {
-        LandmarkDetail(landmark: landmarks[1])
+        LandmarkDetail(landmark: modelData.landmarks[1])
+            .environmentObject(modelData)
     }
 }
