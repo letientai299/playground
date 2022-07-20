@@ -1,28 +1,35 @@
-//
-//  ContentView.swift
-//  Landmarks
-//
-//  Created by Le Tien Tai on 9/5/21.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Hello, Me!").font(.title)
+  @State private var selection: Tab = .featured
 
-            HStack {
-                Text("Joshua Tree National Park").font(.subheadline)
-                Spacer()
-                Text("California").font(.subheadline)
-            }
-        }.padding()
+  enum Tab {
+    case featured
+    case list
+  }
+
+  var body: some View {
+    GeometryReader { geo in
+      TabView(selection: $selection) {
+        CategoryHome()
+          .tag(Tab.featured)
+          .tabItem {
+            Label("Featured", systemImage: "star")
+          }
+
+        LandmarkList()
+          .tag(Tab.list)
+          .tabItem {
+            Label("List", systemImage: "list.bullet")
+          }
+      }
     }
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+  static var previews: some View {
+    ContentView()
+      .environmentObject(ModelData())
+  }
 }

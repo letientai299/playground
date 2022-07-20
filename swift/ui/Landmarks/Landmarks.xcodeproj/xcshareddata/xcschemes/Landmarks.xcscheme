@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1240"
+   LastUpgradeVersion = "1340"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "04BFB0D626477B6400C1C649"
+               BlueprintIdentifier = "04A000662886C55E003D890A"
                BuildableName = "Landmarks.app"
                BlueprintName = "Landmarks"
                ReferencedContainer = "container:Landmarks.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "04BFB0EB26477B6600C1C649"
+               BlueprintIdentifier = "04A000762886C560003D890A"
                BuildableName = "LandmarksTests.xctest"
                BlueprintName = "LandmarksTests"
                ReferencedContainer = "container:Landmarks.xcodeproj">
@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "04BFB0F626477B6600C1C649"
+               BlueprintIdentifier = "04A000802886C560003D890A"
                BuildableName = "LandmarksUITests.xctest"
                BlueprintName = "LandmarksUITests"
                ReferencedContainer = "container:Landmarks.xcodeproj">
@@ -64,7 +64,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "04BFB0D626477B6400C1C649"
+            BlueprintIdentifier = "04A000662886C55E003D890A"
             BuildableName = "Landmarks.app"
             BlueprintName = "Landmarks"
             ReferencedContainer = "container:Landmarks.xcodeproj">
@@ -81,7 +81,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "04BFB0D626477B6400C1C649"
+            BlueprintIdentifier = "04A000662886C55E003D890A"
             BuildableName = "Landmarks.app"
             BlueprintName = "Landmarks"
             ReferencedContainer = "container:Landmarks.xcodeproj">
