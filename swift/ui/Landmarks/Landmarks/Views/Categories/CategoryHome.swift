@@ -7,10 +7,12 @@ struct CategoryHome: View {
   var body: some View {
     NavigationView {
       List {
-        PageView(pages: ModelData().features.map {
-          FeatureCard(lm: $0)
-        })
-        .aspectRatio(3/2, contentMode: .fit)
+        PageView(
+          pages: ModelData().features.map {
+            FeatureCard(lm: $0)
+          }
+        )
+        .aspectRatio(3 / 2, contentMode: .fit)
         .listRowInsets(EdgeInsets())
 
         ForEach(m.categories.keys.sorted(), id: \.self) { cat in
@@ -23,7 +25,7 @@ struct CategoryHome: View {
       .toolbar {
         Button {
           showProfile.toggle()
-        } label:  {
+        } label: {
           Label("User Profile", systemImage: "person.crop.circle")
         }
       }

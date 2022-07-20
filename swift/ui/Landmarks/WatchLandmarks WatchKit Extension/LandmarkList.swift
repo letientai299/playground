@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct LandmarkList: View {
@@ -6,7 +5,7 @@ struct LandmarkList: View {
   @EnvironmentObject var m: ModelData
 
   var fitlered: [Landmark] {
-    m.landmarks.filter{ $0.isFavorite || !favoriteOnly }
+    m.landmarks.filter { $0.isFavorite || !favoriteOnly }
   }
 
   var body: some View {
@@ -28,7 +27,6 @@ struct LandmarkList: View {
     }
   }
 }
-
 
 struct LandmarkList_Previews: PreviewProvider {
   static var previews: some View {

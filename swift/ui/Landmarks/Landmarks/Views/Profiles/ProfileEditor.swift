@@ -28,22 +28,26 @@ struct ProfileEditor: View {
         TextField("Username", text: $p.username)
       }
 
-      Toggle(isOn: $p.prefersNotifications, label: {
-        Text("Enable Notifications").bold()
-      })
+      Toggle(
+        isOn: $p.prefersNotifications,
+        label: {
+          Text("Enable Notifications").bold()
+        })
 
       VStack(alignment: .leading, spacing: 20) {
         Text("Seasonal Photo").bold()
 
         Picker("Seasonal Photo", selection: $p.seasonalPhoto) {
-          ForEach(Profile.Season.allCases) {season in
+          ForEach(Profile.Season.allCases) { season in
             Text(season.rawValue).tag(season)
           }
         }
         .pickerStyle(.segmented)
       }
 
-      DatePicker(selection: $p.goalDate, in: dateRange, displayedComponents: .date) {
+      DatePicker(
+        selection: $p.goalDate, in: dateRange, displayedComponents: .date
+      ) {
         Text("Goal Date").bold()
       }
     }

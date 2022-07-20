@@ -12,13 +12,13 @@ struct LandmarkList: View {
     case rivers = "Rivers"
     case mountains = "Mountains"
 
-    var id: FilterCategory {self}
+    var id: FilterCategory { self }
   }
 
   var fitlered: [Landmark] {
-    m.landmarks.filter{
-      ($0.isFavorite || !favoriteOnly) &&
-      (filter == .all || filter.rawValue == $0.category.rawValue)
+    m.landmarks.filter {
+      ($0.isFavorite || !favoriteOnly)
+        && (filter == .all || filter.rawValue == $0.category.rawValue)
     }
   }
 
@@ -28,7 +28,7 @@ struct LandmarkList: View {
   }
 
   var index: Int? {
-    m.landmarks.firstIndex( where: { $0.id == selected?.id })
+    m.landmarks.firstIndex(where: { $0.id == selected?.id })
   }
 
   var body: some View {
@@ -70,7 +70,6 @@ struct LandmarkList: View {
     .focusedValue(\.selectedLandmark, $m.landmarks[index ?? 0])
   }
 }
-
 
 struct LandmarkList_Previews: PreviewProvider {
   static var previews: some View {

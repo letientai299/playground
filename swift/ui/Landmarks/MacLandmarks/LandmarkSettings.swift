@@ -7,7 +7,7 @@ struct LandmarkSettings: View {
   var body: some View {
     Form {
       Picker("Map zoom:", selection: $zoom) {
-        ForEach(MapView.Zoom.allCases) {z in
+        ForEach(MapView.Zoom.allCases) { z in
           Text(z.rawValue)
         }
       }

@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-struct PageControl: UIViewRepresentable  {
+struct PageControl: UIViewRepresentable {
   var numPages: Int
   @Binding var currentPage: Int
 
@@ -37,4 +37,3 @@ struct PageControl: UIViewRepresentable  {
     }
   }
 }
-

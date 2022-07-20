@@ -5,7 +5,7 @@ struct LandmarkDetail: View {
   var lm: Landmark
 
   var lmIdx: Int {
-    m.landmarks.firstIndex(where: {$0.id == lm.id})!
+    m.landmarks.firstIndex(where: { $0.id == lm.id })!
   }
 
   init(_ lm: Landmark) {

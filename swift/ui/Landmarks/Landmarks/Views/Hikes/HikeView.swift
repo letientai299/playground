@@ -16,52 +16,52 @@ extension AnyTransition {
 }
 
 struct HikeView: View {
-    var hike: Hike
-    @State private var showDetail = true
+  var hike: Hike
+  @State private var showDetail = true
 
-    var body: some View {
-        VStack {
-            HStack {
-                HikeGraph(hike: hike, path: \.elevation)
-                    .frame(width: 50, height: 30)
+  var body: some View {
+    VStack {
+      HStack {
+        HikeGraph(hike: hike, path: \.elevation)
+          .frame(width: 50, height: 30)
 
-                VStack(alignment: .leading) {
-                    Text(hike.name)
-                        .font(.headline)
-                    Text(hike.distanceText)
-                }
-
-                Spacer()
-
-                Button {
-                  withAnimation {
-                    showDetail.toggle()
-                  }
-                } label: {
-                    Label("Graph", systemImage: "chevron.right.circle")
-                        .labelStyle(.iconOnly)
-                        .imageScale(.large)
-                        .rotationEffect(.degrees(showDetail ? 90 : 0))
-                        .scaleEffect(showDetail ? 1.5: 1)
-                        .animation(.easeInOut, value: showDetail)
-                        .padding()
-                }
-            }
-
-            if showDetail {
-                HikeDetail(hike: hike)
-                .transition(.moveAndFade)
-            }
+        VStack(alignment: .leading) {
+          Text(hike.name)
+            .font(.headline)
+          Text(hike.distanceText)
         }
+
+        Spacer()
+
+        Button {
+          withAnimation {
+            showDetail.toggle()
+          }
+        } label: {
+          Label("Graph", systemImage: "chevron.right.circle")
+            .labelStyle(.iconOnly)
+            .imageScale(.large)
+            .rotationEffect(.degrees(showDetail ? 90 : 0))
+            .scaleEffect(showDetail ? 1.5 : 1)
+            .animation(.easeInOut, value: showDetail)
+            .padding()
+        }
+      }
+
+      if showDetail {
+        HikeDetail(hike: hike)
+          .transition(.moveAndFade)
+      }
     }
+  }
 }
 
 struct HikeView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            HikeView(hike: ModelData().hikes[0])
-                .padding()
-            Spacer()
-        }
+  static var previews: some View {
+    VStack {
+      HikeView(hike: ModelData().hikes[0])
+        .padding()
+      Spacer()
     }
+  }
 }

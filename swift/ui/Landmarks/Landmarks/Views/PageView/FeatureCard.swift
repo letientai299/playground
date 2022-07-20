@@ -6,7 +6,7 @@ struct FeatureCard: View {
   var body: some View {
     lm.featureImage?
       .resizable()
-      .aspectRatio(3/2, contentMode: .fit)
+      .aspectRatio(3 / 2, contentMode: .fit)
       .overlay {
         TextOverlay(lm: lm)
       }

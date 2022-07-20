@@ -30,10 +30,11 @@ struct NotificationView_Previews: PreviewProvider {
   static let lm = m.landmarks[0]
 
   static var previews: some View {
-    Group{
+    Group {
       NotificationView()
       NotificationView(
-        title: "Turtle Rock", msg: "You are within 5 miles of \(lm.name)", lm: lm
+        title: "Turtle Rock", msg: "You are within 5 miles of \(lm.name)",
+        lm: lm
       )
     }
   }

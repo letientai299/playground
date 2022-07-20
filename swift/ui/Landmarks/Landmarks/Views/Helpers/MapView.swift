@@ -5,8 +5,9 @@ struct MapView: View {
   var coordinate: CLLocationCoordinate2D
 
   private var region: MKCoordinateRegion {
-    MKCoordinateRegion (
-      center: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868),
+    MKCoordinateRegion(
+      center: CLLocationCoordinate2D(
+        latitude: 34.011_286, longitude: -116.166_868),
       span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
     )
   }
@@ -26,7 +27,7 @@ struct MapView: View {
   }
 
   var body: some View {
-    Map(coordinateRegion:.constant(region))
+    Map(coordinateRegion: .constant(region))
   }
 
   enum Zoom: String, CaseIterable, Identifiable {
@@ -40,6 +41,8 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
   static var previews: some View {
-    MapView(coordinate: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868))
+    MapView(
+      coordinate: CLLocationCoordinate2D(
+        latitude: 34.011_286, longitude: -116.166_868))
   }
 }

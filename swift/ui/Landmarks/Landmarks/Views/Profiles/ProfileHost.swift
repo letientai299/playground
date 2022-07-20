@@ -19,7 +19,7 @@ struct ProfileHost: View {
         Spacer()
         EditButton()
       }
-      
+
       if editMode?.wrappedValue == .inactive {
         ProfileSummary(profile: m.profile)
       } else {

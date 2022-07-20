@@ -1,13 +1,12 @@
-import SwiftUI
 import MapKit
-
+import SwiftUI
 
 struct LandmarkDetail: View {
   @EnvironmentObject var m: ModelData
   var lm: Landmark
 
   var lmIdx: Int {
-    m.landmarks.firstIndex(where: {$0.id == lm.id})!
+    m.landmarks.firstIndex(where: { $0.id == lm.id })!
   }
 
   init(_ lm: Landmark) {
@@ -15,18 +14,18 @@ struct LandmarkDetail: View {
   }
 
   var body: some View {
-    ScrollView{
-      ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)){
+    ScrollView {
+      ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
         MapView(coordinate: lm.locationCoordinate)
           .ignoresSafeArea()
-        .frame(height: 300)
+          .frame(height: 300)
         Button("Open in Maps") {
-          let dst = MKMapItem(placemark: MKPlacemark(coordinate: lm.locationCoordinate))
+          let dst = MKMapItem(
+            placemark: MKPlacemark(coordinate: lm.locationCoordinate))
           dst.name = lm.name
           dst.openInMaps()
         }.padding()
       }
-
 
       VStack(alignment: .leading, spacing: 20) {
         HStack(spacing: 24) {
@@ -50,8 +49,6 @@ struct LandmarkDetail: View {
             .foregroundColor(.secondary)
           }
         }
-
-
 
         Divider()
 

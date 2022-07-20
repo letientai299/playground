@@ -1,8 +1,11 @@
-import WatchKit
 import SwiftUI
 import UserNotifications
+import WatchKit
 
-class NotificationController: WKUserNotificationHostingController<NotificationView> {
+class NotificationController: WKUserNotificationHostingController<
+  NotificationView
+>
+{
   var title: String?
   var msg: String?
   var lm: Landmark?
@@ -30,12 +33,12 @@ class NotificationController: WKUserNotificationHostingController<NotificationVi
 
     let notiData = notification.request.content.userInfo as? [String: Any]
     let aps = notiData?["aps"] as? [String: Any]
-    let alert = aps?["alert"]  as? [String: Any]
+    let alert = aps?["alert"] as? [String: Any]
 
     title = alert?["title"] as? String
     msg = alert?["body"] as? String
 
-    if let idx = notiData?[lmIdxKey]  as? Int {
+    if let idx = notiData?[lmIdxKey] as? Int {
       lm = m.landmarks[idx]
     }
   }

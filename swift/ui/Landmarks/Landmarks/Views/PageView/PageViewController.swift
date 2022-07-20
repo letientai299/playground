@@ -3,7 +3,7 @@ import UIKit
 
 struct PageViewController<Page: View>: UIViewControllerRepresentable {
   @Binding var currentPage: Int
-  
+
   var pages: [Page]
 
   func makeCoordinator() -> Coordinator {
@@ -22,7 +22,9 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
     return pageViewController
   }
 
-  func updateUIViewController(_ uiViewController: UIPageViewController, context: Context) {
+  func updateUIViewController(
+    _ uiViewController: UIPageViewController, context: Context
+  ) {
     uiViewController.setViewControllers(
       [context.coordinator.ctrls[currentPage]],
       direction: .forward,
@@ -33,7 +35,8 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
   class Coordinator:
     NSObject,
     UIPageViewControllerDataSource,
-    UIPageViewControllerDelegate {
+    UIPageViewControllerDelegate
+  {
     func pageViewController(
       _ pvc: UIPageViewController, viewControllerBefore vc: UIViewController
     ) -> UIViewController? {
@@ -69,18 +72,19 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
       transitionCompleted completed: Bool
     ) {
       if completed,
-         let visibleVC = pvc.viewControllers?.first,
-         let index = ctrls.firstIndex(of: visibleVC) {
+        let visibleVC = pvc.viewControllers?.first,
+        let index = ctrls.firstIndex(of: visibleVC)
+      {
         parent.currentPage = index
       }
     }
 
     var parent: PageViewController
-    var ctrls : [UIViewController] = []
+    var ctrls: [UIViewController] = []
 
     init(_ parent: PageViewController<Page>) {
       self.parent = parent
-      ctrls = parent.pages.map { UIHostingController(rootView: $0)}
+      ctrls = parent.pages.map { UIHostingController(rootView: $0) }
     }
   }
 }

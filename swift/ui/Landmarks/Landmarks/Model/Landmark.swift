@@ -1,6 +1,6 @@
 import Foundation
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct Landmark: Hashable, Codable, Identifiable {
   var id: Int
@@ -25,7 +25,7 @@ struct Landmark: Hashable, Codable, Identifiable {
   }
 
   var featureImage: Image? {
-    isFeatured ? Image(imageName + "_feature"): nil
+    isFeatured ? Image(imageName + "_feature") : nil
   }
 
   private var coordinates: Coordinates

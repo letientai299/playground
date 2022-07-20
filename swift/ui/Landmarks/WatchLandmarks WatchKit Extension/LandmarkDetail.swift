@@ -9,7 +9,7 @@ struct LandmarkDetail: View {
   }
 
   var lmIdx: Int {
-    m.landmarks.firstIndex(where: {$0.id == lm.id})!
+    m.landmarks.firstIndex(where: { $0.id == lm.id })!
   }
 
   var body: some View {

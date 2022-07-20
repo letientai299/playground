@@ -12,7 +12,7 @@ struct CategoryRow: View {
         .padding(.top, 5)
 
       ScrollView(.horizontal, showsIndicators: false) {
-        HStack(alignment: .top, spacing: 0){
+        HStack(alignment: .top, spacing: 0) {
           ForEach(items) { lm in
             NavigationLink {
               LandmarkDetail(lm)
