@@ -37,3 +37,10 @@ Code: [`./Landmarks`](./Landmarks)
 ## Learning SwiftUI
 
 https://developer.apple.com/tutorials/swiftui-concepts
+
+The code [`./Concepts`](./Concepts), although it's very much for experiment. The
+above link is not a tutorial, it's a code walkthrough.
+
+- `@State`: is 2 way data for owned data.
+- `@Binding`: create wrapper for 2-way date binding for child view which doesn's
+  own the data, i.e the data is `@State` of other view.

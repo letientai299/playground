@@ -1,9 +1,17 @@
 import SwiftUI
 
 struct ContentView: View {
+  @State private var count = 0
   var body: some View {
-    Text("Hello, world!")
-      .padding()
+    HStack {
+      Button {
+        count += 1
+      } label: {
+        Text("Count")
+      }
+
+      Text("\(count)")
+    }
   }
 }
 
