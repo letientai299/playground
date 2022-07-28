@@ -112,12 +112,20 @@ function App() {
   return (
     <div
       className="
+      dark:bg-slate-900
+      dark:text-white
       flex gap-2 flex-col items-center justify-center w-full h-full text-2xl p-8
     "
     >
       <input
         type="text"
-        className={'text-center border-blue-200 border-2 rounded-lg w-full p-1'}
+        className="
+          dark:bg-slate-100
+          dark:text-slate-800
+          border-blue-300
+          border-2
+          focus:bg-white
+          text-center rounded-lg w-full p-1"
         placeholder="Duration: 10m, 30s, ..."
         autoFocus
         value={durationString}
@@ -125,9 +133,9 @@ function App() {
         onKeyDown={onKeyDown}
       />
 
-      <div className="grid grid-cols-2 w-full justify-center text-white">
+      <div className="grid grid-cols-2 gap-1 w-full justify-center text-white">
         <button
-          className={'bg-blue-500 border-2 rounded-lg p-1'}
+          className={'bg-blue-500 focus:bg-blue-700 rounded-lg p-1'}
           onClick={start}
         >
           <div className="flex justify-center items-center pl-2">
@@ -137,7 +145,7 @@ function App() {
         </button>
 
         <button
-          className={'bg-orange-500 border-2 rounded-lg p-1'}
+          className={'bg-orange-500 focus:bg-orange-700 rounded-lg p-1'}
           onClick={reset}
         >
           <div className="flex justify-center items-center pl-2">

@@ -11,7 +11,7 @@
 @layer base {
   @font-face {
     font-family: 'digit';
-    src: url(../public/DS-DIGI.TTF) format('truetype');
+    src: url(/DS-DIGI.TTF) format('truetype');
   }
 }
 
