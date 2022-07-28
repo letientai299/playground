@@ -64,7 +64,7 @@
         "fullscreen": false,
         "width": 400,
         "height": 300,
-        "resizable": true,
+        "resizable": false,
         "title": "Timer"
       }
     ]
