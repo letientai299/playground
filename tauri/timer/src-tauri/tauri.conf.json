@@ -11,6 +11,10 @@
     "version": "0.1.0"
   },
   "tauri": {
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    },
     "allowlist": {
       "all": true
     },
@@ -57,7 +61,7 @@
       {
         "fullscreen": false,
         "width": 400,
-        "height": 600,
+        "height": 300,
         "resizable": true,
         "title": "Timer"
       }

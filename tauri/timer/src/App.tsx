@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import parse from 'parse-duration';
 import { FaPause, FaPlay, FaUndo } from 'react-icons/fa';
-
 import {
   isPermissionGranted,
   requestPermission,
   sendNotification,
 } from '@tauri-apps/api/notification';
+
+const timerFinishedSound = new Audio('/noti.mp3');
 
 let permissionGranted = await isPermissionGranted();
 if (!permissionGranted) {
@@ -41,7 +42,7 @@ function notify(duration: string) {
 }
 
 function App() {
-  const [durationString, setDurationString] = useState('4s');
+  const [durationString, setDurationString] = useState('30m');
   const [remain, setRemain] = useState(0);
   const [running, setRunning] = useState(false);
 
@@ -52,6 +53,12 @@ function App() {
     }
   }, [durationString]);
 
+  function finish() {
+    setRunning(false);
+    notify(durationString);
+    timerFinishedSound.play().then();
+  }
+
   useEffect(() => {
     if (!running) {
       return;
@@ -59,12 +66,12 @@ function App() {
 
     const id = setInterval(() => {
       setRemain((v) => {
-        if (v <= 0) {
-          setRunning(false);
-          notify(durationString);
-          return 0;
+        if (v > 0) {
+          return -1;
         }
-        return v - 1;
+
+        finish();
+        return 0;
       });
     }, 1000);
 
@@ -78,7 +85,7 @@ function App() {
     second,
   )}`;
 
-  let startButtonText = '';
+  let startButtonText: string;
   if (running) {
     startButtonText = 'Pause';
   } else if (parseDuration(durationString) === remain) {
