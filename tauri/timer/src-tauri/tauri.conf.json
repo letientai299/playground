@@ -7,7 +7,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "timer",
+    "productName": "Timer",
     "version": "0.1.0"
   },
   "tauri": {
@@ -16,11 +16,13 @@
       "iconAsTemplate": true
     },
     "allowlist": {
-      "all": true
+      "notification": {
+        "all": true
+      }
     },
     "bundle": {
       "active": true,
-      "category": "Tool",
+      "category": "Productivity",
       "copyright": "",
       "deb": {
         "depends": []

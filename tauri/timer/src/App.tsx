@@ -9,12 +9,6 @@ import {
 
 const timerFinishedSound = new Audio('/noti.mp3');
 
-let permissionGranted = await isPermissionGranted();
-if (!permissionGranted) {
-  const permission = await requestPermission();
-  permissionGranted = permission === 'granted';
-}
-
 const leftPad2 = (n: Number) => ('' + n).padStart(2, '0');
 
 function refineDuration(s: string) {
@@ -30,10 +24,6 @@ const parseDuration = (s: string) => {
 };
 
 function notify(duration: string) {
-  if (!permissionGranted) {
-    return;
-  }
-
   duration = refineDuration(duration);
   sendNotification({
     title: 'Timer',
@@ -45,6 +35,20 @@ function App() {
   const [durationString, setDurationString] = useState('30m');
   const [remain, setRemain] = useState(0);
   const [running, setRunning] = useState(false);
+  const [canNotify, setCanNotify] = useState(false);
+
+  useEffect(() => {
+    const check = async () => {
+      console.log('call one');
+      let permissionGranted = await isPermissionGranted();
+      if (!permissionGranted) {
+        const permission = await requestPermission();
+        permissionGranted = permission === 'granted';
+      }
+      return permissionGranted;
+    };
+    check().then((ok) => setCanNotify(ok));
+  }, []);
 
   useEffect(() => {
     if (!running) {
@@ -55,7 +59,9 @@ function App() {
 
   function finish() {
     setRunning(false);
-    notify(durationString);
+    if (canNotify) {
+      notify(durationString);
+    }
     timerFinishedSound.play().then();
   }
 
@@ -67,7 +73,7 @@ function App() {
     const id = setInterval(() => {
       setRemain((v) => {
         if (v > 0) {
-          return -1;
+          return v - 1;
         }
 
         finish();
@@ -167,8 +173,8 @@ function App() {
         grid grid-cols-8 gap-1 items-stretch
         justify-center text-7xl font-digit text-right"
       >
-        {[...timeVisual].map((c) => (
-          <div>{c}</div>
+        {[...timeVisual].map((c, i) => (
+          <div key={i}>{c}</div>
         ))}
       </div>
     </div>
