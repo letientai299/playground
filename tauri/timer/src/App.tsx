@@ -1,45 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import parse from 'parse-duration';
 import { FaPause, FaPlay, FaUndo } from 'react-icons/fa';
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   isPermissionGranted,
   requestPermission,
-  sendNotification,
 } from '@tauri-apps/api/notification';
+
+import { Event, listen, UnlistenFn } from '@tauri-apps/api/event';
+
+import { fmtDuration, notify, parseDuration } from './util';
+import { timerEvent } from './protocol';
+import { invoke } from '@tauri-apps/api';
 
 const timerFinishedSound = new Audio('/noti.mp3');
 
-const leftPad2 = (n: Number) => ('' + n).padStart(2, '0');
-
-function refineDuration(s: string) {
-  if (!s.endsWith('s') && !s.endsWith('h') && !s.endsWith('m')) {
-    s += 's';
-  }
-  return s;
-}
-
-const parseDuration = (s: string) => {
-  s = refineDuration(s);
-  return parse(s) / 1000;
-};
-
-function notify(duration: string) {
-  duration = refineDuration(duration);
-  sendNotification({
-    title: 'Timer',
-    body: `Timer of ${duration} finished`,
-  });
-}
-
 function App() {
-  const [durationString, setDurationString] = useState('30m');
+  const [durationString, setDurationString] = useState('30');
   const [remain, setRemain] = useState(0);
   const [running, setRunning] = useState(false);
   const [canNotify, setCanNotify] = useState(false);
 
   useEffect(() => {
     const check = async () => {
-      console.log('call one');
       let permissionGranted = await isPermissionGranted();
       if (!permissionGranted) {
         const permission = await requestPermission();
@@ -57,6 +40,40 @@ function App() {
     }
   }, [durationString]);
 
+  useEffect(() => {
+    if (!running) {
+      return;
+    }
+
+    let unlisten: UnlistenFn;
+    const listenerId = uuidv4();
+    const setup = async () => {
+      unlisten = await listen(
+        timerEvent,
+        (e: Event<{ seconds: number; id: String }>) => {
+          const id = e.payload.id;
+          if (id != listenerId) {
+            return; // don't handle it
+          }
+
+          const rem = e.payload.seconds;
+          setRemain(rem);
+          if (rem === 0) {
+            finish();
+          }
+        },
+      );
+
+      await invoke('start_countdown', { seconds: remain, id: listenerId });
+    };
+
+    setup();
+
+    return () => {
+      unlisten();
+    };
+  }, [running]);
+
   function finish() {
     setRunning(false);
     if (canNotify) {
@@ -65,31 +82,7 @@ function App() {
     timerFinishedSound.play().then();
   }
 
-  useEffect(() => {
-    if (!running) {
-      return;
-    }
-
-    const id = setInterval(() => {
-      setRemain((v) => {
-        if (v > 0) {
-          return v - 1;
-        }
-
-        finish();
-        return 0;
-      });
-    }, 1000);
-
-    return () => clearInterval(id);
-  }, [running]);
-
-  const hour = Math.floor(remain / 3600);
-  const minute = Math.floor((remain - hour * 3600) / 60);
-  const second = remain - hour * 3600 - minute * 60;
-  const timeVisual = `${leftPad2(hour)}:${leftPad2(minute)}:${leftPad2(
-    second,
-  )}`;
+  const timeVisual = fmtDuration(remain);
 
   let startButtonText: string;
   if (running) {
@@ -102,12 +95,11 @@ function App() {
     startButtonText = 'Continue';
   }
 
-  const start = () => {
+  const start = async () => {
     if (remain === 0) {
-      reset();
+      setRemain(parseDuration(durationString));
     }
-
-    setRunning(!running);
+    setRunning((v) => !v);
   };
 
   const reset = () => setRemain(parseDuration(durationString));
@@ -119,7 +111,7 @@ function App() {
 
     e.preventDefault();
     setRemain(parseDuration(durationString));
-    setRunning(true);
+    start();
   };
 
   return (
@@ -130,6 +122,7 @@ function App() {
       flex gap-2 flex-col items-center justify-center w-full h-full text-2xl p-8
     "
     >
+      <span>Is running {running ? 'true' : 'false'}</span>
       <input
         type="text"
         className="
