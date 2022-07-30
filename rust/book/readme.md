@@ -2,17 +2,6 @@
 
 https://doc.rust-lang.org/book/ch01-01-installation.html
 
-## Vim setup
-
-To use vim until the code is complicated enough to require a real IDE, I wrote
-some [scripts](./scripts)
-
-- `run.sh`: compile and run a single Rust file.
-
-  ```viml
-  nmap <leader>r <ESC>:!$(git rev-parse --show-toplevel)/rust/book/scripts/run.sh %<CR>
-  ```
-
 ## The Rust Programming Language
 
 Done
@@ -34,6 +23,10 @@ Done
 - [x] 1.3. Hello, Cargo!
 
 ## 2. Programming a Guessing Game
+
+- _Trail_ must be **in scope** to use the function of it.
+- Variables of different types can be **shadowed**.
+- `rustfmt` config can be placed in parent dir
 
 ## 3. Common Programming Concepts
 
