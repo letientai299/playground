@@ -1,11 +1,9 @@
 #![cfg_attr(
-all(not(debug_assertions), target_os = "windows"),
-windows_subsystem = "windows"
+    all(not(debug_assertions), target_os = "windows"),
+    windows_subsystem = "windows"
 )]
 
-use std::thread::sleep;
 use std::time::Duration;
-
 use tauri::Window;
 
 // the payload type must implement `Serialize` and `Clone`.
@@ -21,7 +19,7 @@ fn countdown(seconds: u32, tick: impl Fn(u32)) {
     let mut rem = seconds;
     while rem > 0 {
         let second = Duration::from_secs(1);
-        sleep(second);
+        spin_sleep::sleep(second);
         rem -= 1;
         tick(rem)
     }
@@ -30,7 +28,13 @@ fn countdown(seconds: u32, tick: impl Fn(u32)) {
 #[tauri::command]
 async fn start_countdown(window: Window, seconds: u32, id: String) {
     countdown(seconds, |rem| {
-        let _ = window.emit(TIMER_EVENT, Payload { seconds: rem, id: id.clone() });
+        let _ = window.emit(
+            TIMER_EVENT,
+            Payload {
+                seconds: rem,
+                id: id.clone(),
+            },
+        );
     });
 }
 

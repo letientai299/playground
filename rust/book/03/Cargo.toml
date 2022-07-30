@@ -1,0 +1,7 @@
+[package]
+name = "code-03"
+version = "0.1.0"
+
+[[bin]]
+name = "code-03"
+path = "./code.rs"

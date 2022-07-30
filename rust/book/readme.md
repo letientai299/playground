@@ -30,17 +30,56 @@ Done
 
 ## 3. Common Programming Concepts
 
-- [ ] 3.1. Variables and Mutability
-- [ ] 3.2. Data Types
-- [ ] 3.3. Functions
-- [ ] 3.4. Comments
-- [ ] 3.5. Control Flow
+- File name in rust can have `.`, i.e. `3.1.code.rs` is invalid name.
+
+- [x] 3.1. Variables and Mutability
+  - `let`: immutable var _by default_, can use `let mut` to have mutable var
+  - `const`: constant, can't use with `mut`,
+- [x] 3.2. Data Types
+  - 4 primary scala types: integers, float, bool and char.
+  - Overflow handling: panic in debug mode, 2-complement wrapping in release.
+  - `char` is 4 bytes in size, possible to represent Unicode Scalar Value, but
+    doens't necesssary be a real characters (due to unicode graphene).
+  - To print array `a`, use `{a:?}` or `println!({:?}, a)`
+  - The "string interpolation" syntax is weak. This won't work:
+    `println!("{a[1]}");`
+  - Type of array index must be `usize`: **pointer-sized unsigned int**.
+- [x] 3.3. Functions
+- [x] 3.4. Comments
+- [x] 3.5. Control Flow
+  - Rust have `let ... = if ...`, doesn't need ternary operator.
+  - `loop` can be an expression via `break <value>`.
+  - `loop`, `for` and `while` can have label for breaking from nested loops.
 
 ## 4. Understanding Ownership
 
-- [ ] 4.1. What is Ownership?
-- [ ] 4.2. References and Borrowing
-- [ ] 4.3. The Slice Type
+- [x] 4.1. What is Ownership?
+
+  - Main purpose of Ownership is **managing heap data**.
+  - Rules: **each value has an owner, one owner as a time, value is dropped if
+    owner go out of scope**.
+  - For reference-type data, assign variable is a **move**: shadow copying point
+    data _and_ invalidate the orignal variable, leave only the assigned
+    variable.
+  - `Copy` trait can't be implemented if the type or any of its parts
+    implemented `Drop` trait.
+  - On `String` vs `str`: https://stackoverflow.com/a/24159933/3869533
+    - `String`: owned heap allocated string
+    - `str`: immutable fixed-length heap allocated sequence of UTF-8 bytes, can
+      only used via pointer, mostly as `&str`
+      - Literal string is `&'static str`
+  - Functions either **move or copy** its params.
+
+- [x] 4.2. References and Borrowing
+
+  - `&s` creates a reference to `s` but doesn't own it. Thus, `s` is still
+    valid, and won't be droped after the reference go out of scope.
+  - Can't have multiple `&mut` simultaneously or `&mut` and `&` simultaneously.
+
+- [x] 4.3. The Slice Type
+  - String slide range indices must occurr at valid UTF-8 character boundaries.
+  - Defining a function to take a string slice `&str` instead of `&String` make
+    it more general and useful.
 
 ## 5. Using Structs to Structure Related Data
 
@@ -155,7 +194,7 @@ Done
 ## 21. Appendix
 
 - [ ] 21.1. A - Keywords
-- [ ] 21.2. B - Operators and Symbols
+- [x] 21.2. B - Operators and Symbols
 - [ ] 21.3. C - Derivable Traits
 - [ ] 21.4. D - Useful Development Tools
 - [ ] 21.5. E - Editions
