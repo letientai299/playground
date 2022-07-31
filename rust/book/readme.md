@@ -83,35 +83,66 @@ Done
 
 ## 5. Using Structs to Structure Related Data
 
-- [ ] 5.1. Defining and Instantiating Structs
-- [ ] 5.2. An Example Program Using Structs
-- [ ] 5.3. Method Syntax
+- [x] 5.1. Defining and Instantiating Structs
+  - Here's how to partially destructuring a struct
+  ```rust
+  let User {
+    username, email, .. // other fields, ...
+  } = a;
+  ```
+- [x] 5.2. An Example Program Using Structs
+
+  - `{:?}` for JSON like output
+  - `{:#?}` for JSON like pretty print output
+  - `dbg!()` macro is much nicer, print to `stderr`, but still requires opt-in
+    for `#[derive(Debug)]`
+
+- [x] 5.3. Method Syntax
+  - `self` in method is when we want to prevent the instance to be used after
+    calling the method. This is rare.
+  - Rust doesnt have `static` mmethod like other language. It's instead a `fn`
+    without `&self`.
+  - `impl` can be within another function.
 
 ## 6. Enums and Pattern Matching
 
-- [ ] 6.1. Defining an Enum
-- [ ] 6.2. The match Control Flow Construct
+- [x] 6.1. Defining an Enum
+- [x] 6.2. The match Control Flow Construct
 - [ ] 6.3. Concise Control Flow with if let
 
 ## 7. Managing Growing Projects with Packages, Crates, and Modules
 
-- [ ] 7.1. Packages and Crates
-- [ ] 7.2. Defining Modules to Control Scope and Privacy
-- [ ] 7.3. Paths for Referring to an Item in the Module Tree
-- [ ] 7.4. Bringing Paths Into Scope with the use Keyword
-- [ ] 7.5. Separating Modules into Different Files
+- [x] 7.1. Packages and Crates
+  - `src/main.rs` indicates that the package is a binary crate
+  - `src/lib.rs` indicates that the package is a lib crate
+- [x] 7.2. Defining Modules to Control Scope and Privacy
+- [x] 7.3. Paths for Referring to an Item in the Module Tree
+  - If we have both `main.rs` and `lib.rs`, the module tree should be defined in
+    `lib.rs`.
+- [x] 7.4. Bringing Paths Into Scope with the use Keyword
+  - Convention: use `::` to call non-local function, thus:
+    - `use` up to module name, then call `module::func`
+    - `use` up to struct, enum name, then call `Enum::func`
+  - `pub use` to re-export and also adjust how the users call to internal module.
+- [x] 7.5. Separating Modules into Different Files
 
 ## 8. Common Collections
 
-- [ ] 8.1. Storing Lists of Values with Vectors
-- [ ] 8.2. Storing UTF-8 Encoded Text with Strings
-- [ ] 8.3. Storing Keys with Associated Values in Hash Maps
+- [x] 8.1. Storing Lists of Values with Vectors
+- [x] 8.2. Storing UTF-8 Encoded Text with Strings
+  - Getting grapheme is not supported natively in Rust.
+- [x] 8.3. Storing Keys with Associated Values in Hash Maps
+  - Default hash algo in Rust is SipHash to prevent DoS.
 
 ## 9. Error Handling
 
-- [ ] 9.1. Unrecoverable Errors with panic!
-- [ ] 9.2. Recoverable Errors with Result
-- [ ] 9.3. To panic! or Not to panic!
+- [x] 9.1. Unrecoverable Errors with panic!
+- [x] 9.2. Recoverable Errors with Result
+  - `?` can be used only with `Result`,`Option` or types that implement
+    `FromResidual`.
+  - To convert between `Option` and `Result`, use `Ok()` and `.ok_or()`.
+  - `main` can return anythign that implement `Termination` trait.
+- [x] 9.3. To panic! or Not to panic!
 
 ## 10. Generic Types, Traits, and Lifetimes
 
@@ -195,7 +226,7 @@ Done
 
 - [ ] 21.1. A - Keywords
 - [x] 21.2. B - Operators and Symbols
-- [ ] 21.3. C - Derivable Traits
+- [x] 21.3. C - Derivable Traits
 - [ ] 21.4. D - Useful Development Tools
 - [ ] 21.5. E - Editions
 - [ ] 21.6. F - Translations of the Book
