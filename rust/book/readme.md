@@ -146,9 +146,31 @@ Done
 
 ## 10. Generic Types, Traits, and Lifetimes
 
-- [ ] 10.1. Generic Data Types
-- [ ] 10.2. Traits: Defining Shared Behavior
-- [ ] 10.3. Validating References with Lifetimes
+**This is hardest chapter so far.**
+
+- [x] 10.1. Generic Data Types
+
+  - Rust generic uses **Monomorphization**: compiler generates different copy of
+    the generic function using the concrete type. This makes the binary size
+    bigger, compiling slower, might affect CPU cache. Go uses this partially, mix
+    with the other technique that make function operates on pointer to data, and
+    pointer will be resolved at runtime.
+
+- [x] 10.2. Traits: Defining Shared Behavior
+
+  - It isn’t possible to call the default implementation from an overriding
+    implementation of that same method.
+  - OK, so we have several way to define the type on generic function, including
+    the `where` keyword.
+  - Return `-> imp SomeTrait` is similar to `some SomeProtocol` in Swift, all
+    `return` must be of same type.
+    - Also similar with `AnyView` or other help types in Swift, we can use `Box`
+      in Rust to overcome the limitation. Must use `Box<dyn SomeTrait>`, though.
+
+- [x] 10.3. Validating References with Lifetimes
+  - **Owned Types**: variable that own the value, assign means move.
+  - **Borrowed Types**: mostly reference type, variable has `&` prefix, can only
+    refer to value, doesn't own it.
 
 ## 11. Writing Automated Tests
 
