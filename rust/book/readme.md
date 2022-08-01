@@ -174,18 +174,33 @@ Done
 
 ## 11. Writing Automated Tests
 
-- [ ] 11.1. How to Write Tests
-- [ ] 11.2. Controlling How Tests Are Run
-- [ ] 11.3. Test Organization
+- [x] 11.1. How to Write Tests
+  - Built-in test features in Rust is much less useful than Go. There's no
+    built-in benchmark (yet, it's on unstable channel), no table-driven test, no
+    rexgex matching support for panic message (Go doens't have this built-in,
+    but at least we can implement it easily via `defer` and `recover`).
+- [x] 11.2. Controlling How Tests Are Run
+  - There's no `t.Skip()` to ignore test programmatically.
+  - Clion can't generate Rust test.
+- [x] 11.3. Test Organization
+  - Unit tests live in `src`, in each file they're testing. the convention is
+    use module `tests` and `cfg(test)`
+  - `tests` folder is for integration test.
+    - Files in subdirectories of the `tests` directory don’t get compiled as
+      separate crates or have sections in the test output. Put common util in
+      these sub directories instead.
 
 ## 12. An I/O Project: Building a Command Line Program
 
-- [ ] 12.1. Accepting Command Line Arguments
-- [ ] 12.2. Reading a File
-- [ ] 12.3. Refactoring to Improve Modularity and Error Handling
-- [ ] 12.4. Developing the Library’s Functionality with Test Driven Development
-- [ ] 12.5. Working with Environment Variables
-- [ ] 12.6. Writing Error Messages to Standard Error Instead of Standard Output
+- [x] 12.1. Accepting Command Line Arguments
+  - Shit, `env::args()` will panic if input contains Unicode.
+- [x] 12.2. Reading a File
+- [x] 12.3. Refactoring to Improve Modularity and Error Handling
+  - Using `()` is the idiomatic way to indicate that we’re calling `run`
+    for its side effects only
+- [x] 12.4. Developing the Library’s Functionality with Test Driven Development
+- [x] 12.5. Working with Environment Variables
+- [x] 12.6. Writing Error Messages to Standard Error Instead of Standard Output
 
 ## 13. Functional Language Features: Iterators and Closures
 
