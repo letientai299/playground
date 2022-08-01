@@ -204,18 +204,22 @@ Done
 
 ## 13. Functional Language Features: Iterators and Closures
 
-- [ ] 13.1. Closures: Anonymous Functions that Can Capture Their Environment
-- [ ] 13.2. Processing a Series of Items with Iterators
-- [ ] 13.3. Improving Our I/O Project
-- [ ] 13.4. Comparing Performance: Loops vs. Iterators
+- [x] 13.1. Closures: Anonymous Functions that Can Capture Their Environment
+- [x] 13.2. Processing a Series of Items with Iterators
+  - `Iterator` is lazy, need to _consume_ it.
+- [x] 13.3. Improving Our I/O Project
+- [x] 13.4. Comparing Performance: Loops vs. Iterators
+  - **zero-overhead principle**: What you don’t use, you don’t pay for. And
+    further: What you do use, you couldn’t hand code any better.
 
 ## 14. More about Cargo and Crates.io
 
-- [ ] 14.1. Customizing Builds with Release Profiles
-- [ ] 14.2. Publishing a Crate to Crates.io
+- [x] 14.1. Customizing Builds with Release Profiles
+- [x] 14.2. Publishing a Crate to Crates.io
 - [ ] 14.3. Cargo Workspaces
-- [ ] 14.4. Installing Binaries from Crates.io with cargo install
-- [ ] 14.5. Extending Cargo with Custom Commands
+  - Workspaces: set of packages share same `Cargo.lock` and output dir.
+- [x] 14.4. Installing Binaries from Crates.io with cargo install
+- [x] 14.5. Extending Cargo with Custom Commands
 
 ## 15. Smart Pointers
 
