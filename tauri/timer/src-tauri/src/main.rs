@@ -6,7 +6,7 @@
 #[macro_use]
 extern crate lazy_static;
 
-use rodio::{Decoder, OutputStream, Sink};
+use rodio::{Decoder, OutputStream, Sink, Source};
 use std::collections::HashSet;
 use std::error::Error;
 use std::fs::File;
@@ -16,6 +16,7 @@ use std::sync::mpsc::{channel, Receiver};
 use std::sync::Mutex;
 use std::thread;
 use std::time::{Duration, Instant};
+use tauri::api::notification::Notification;
 use tauri::Window;
 
 // the payload type must implement `Serialize` and `Clone`.
@@ -37,9 +38,17 @@ async fn stop_countdown(_: Window, id: String) {
 }
 
 #[tauri::command]
-async fn start_countdown(app: tauri::AppHandle, window: Window, seconds: u64, id: String) {
+async fn start_countdown(
+    app: tauri::AppHandle,
+    window: Window,
+    seconds: u64,
+    total: String,
+    id: String,
+) {
     let rx = countdown(Duration::from_secs(seconds), &id);
     for d in rx {
+        println!("remaining: {}", d.as_millis());
+
         let res = window.emit(
             TIMER_EVENT,
             Payload {
@@ -47,8 +56,6 @@ async fn start_countdown(app: tauri::AppHandle, window: Window, seconds: u64, id
                 id: id.clone(),
             },
         );
-
-        println!("remaining: {}", d.as_millis());
 
         if let Err(e) = res {
             eprintln!("fail to send remaining time to GUI, err={:?}", e);
@@ -62,8 +69,24 @@ async fn start_countdown(app: tauri::AppHandle, window: Window, seconds: u64, id
     let mp3_path = app.path_resolver().resolve_resource("noti.mp3").unwrap();
     let mp3 = mp3_path.to_str().unwrap();
 
-    if let Err(e) = notify(mp3) {
+    if let Err(e) = notify(&app, mp3, total.as_str()) {
         eprintln!("fail to play notification sound, err={}", e);
+        return;
+    }
+
+    // ideally, we should stop righ there as the timer finished. However, when running in
+    // background, the distance between each loop keep increasing due to some (unsure) OS power
+    // saving. Hence, we can't be sure that the frontend get last timer event to reset the GUI
+    // state. So, we keep sending ZERO event, wait for stop_countdown trigger.
+    while !is_disposed(&id) {
+        spin_sleep::sleep(Duration::from_secs(1));
+        let _ = window.emit(
+            TIMER_EVENT,
+            Payload {
+                seconds: 0,
+                id: id.clone(),
+            },
+        );
     }
 }
 
@@ -95,9 +118,8 @@ fn countdown(d: Duration, id: &String) -> Receiver<Duration> {
 
             let elapsed = pre.elapsed();
             if d < elapsed {
-                return;
+                break;
             }
-
             d = d.sub(elapsed);
             pre = Instant::now();
 
@@ -106,24 +128,41 @@ fn countdown(d: Duration, id: &String) -> Receiver<Duration> {
             if sleep > d {
                 sleep = d;
             }
+
             spin_sleep::sleep(sleep);
             if let Err(e) = tx.send(d) {
                 println!("fail to send, err={}", e);
             }
+        }
+
+        if let Err(e) = tx.send(Duration::ZERO) {
+            println!("fail to send, err={}", e);
         }
     });
 
     rx
 }
 
-fn notify(path: &str) -> Result<(), Box<dyn Error>> {
+fn notify(app: &tauri::AppHandle, path: &str, total: &str) -> Result<(), Box<dyn Error>> {
+    let msg = format!("Timer of {} finished", total);
+    Notification::new(&app.config().tauri.bundle.identifier)
+        .title("Timer finished")
+        .body(msg)
+        .show()?;
+    play_sound(path)?;
+    Ok(())
+}
+
+fn play_sound(path: &str) -> Result<(), Box<dyn Error>> {
+    println!("Playing sound");
     // we don't use the _stream, but if we don't keep a variable for it,
     // it will be dropped (due to Rust ownership, I guess), lead to NoDevice err.
     let (_stream, stream_handle) = OutputStream::try_default()?;
     let file = BufReader::new(File::open(path)?);
-    let source = Decoder::new(file)?;
+    let source = Decoder::new_mp3(file)?.repeat_infinite();
     let sink = Sink::try_new(&stream_handle)?;
+    sink.set_volume(5.0);
     sink.append(source);
-    sink.sleep_until_end();
+    thread::sleep(Duration::from_secs(5));
     Ok(())
 }

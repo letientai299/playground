@@ -1,5 +1,4 @@
 import parse from 'parse-duration';
-import { sendNotification } from '@tauri-apps/api/notification';
 
 export function fmtDuration(remain: number) {
   const hour = Math.floor(remain / 3600);
@@ -21,11 +20,3 @@ export const parseDuration = (s: string) => {
   s = refineDuration(s);
   return parse(s) / 1000;
 };
-
-export function notify(duration: string) {
-  duration = refineDuration(duration);
-  sendNotification({
-    title: 'Timer',
-    body: `Timer of ${duration} finished`,
-  });
-}

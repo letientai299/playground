@@ -10,14 +10,15 @@ import {
 import { invoke } from '@tauri-apps/api';
 import { Event, listen, UnlistenFn } from '@tauri-apps/api/event';
 import { timerEvent } from './protocol';
-import { fmtDuration, notify, parseDuration } from './util';
+import { fmtDuration, parseDuration, refineDuration } from './util';
 
 function App() {
   const [durationString, setDurationString] = useState('30');
   const [remain, setRemain] = useState(0);
   const [running, setRunning] = useState(false);
-  const [canNotify, setCanNotify] = useState(false);
 
+  // simply check for notification permission on startup.
+  // the actual notification will be done in the Rust side.
   useEffect(() => {
     const check = async () => {
       let permissionGranted = await isPermissionGranted();
@@ -27,7 +28,7 @@ function App() {
       }
       return permissionGranted;
     };
-    check().then((ok) => setCanNotify(ok));
+    check();
   }, []);
 
   useEffect(() => {
@@ -56,12 +57,16 @@ function App() {
           const rem = e.payload.seconds;
           setRemain(rem);
           if (rem === 0) {
-            finish();
+            setRunning(false);
           }
         },
       );
 
-      await invoke('start_countdown', { seconds: remain, id: listenerId });
+      await invoke('start_countdown', {
+        seconds: remain,
+        total: refineDuration(durationString),
+        id: listenerId,
+      });
     };
 
     setup();
@@ -70,13 +75,6 @@ function App() {
       invoke('stop_countdown', { id: listenerId }).then();
     };
   }, [running]);
-
-  function finish() {
-    setRunning(false);
-    if (canNotify) {
-      notify(durationString);
-    }
-  }
 
   const timeVisual = fmtDuration(remain);
 
