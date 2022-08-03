@@ -26,6 +26,8 @@ serde_json = "1.0.82"
 serde = { version = "1.0.140", features = ["derive"] }
 tauri = { version = "1.0.5", features = ["notification-all", "system-tray"] }
 spin_sleep = "1.1.1"
+rodio = "0.15.0"
+lazy_static = "1.4.0"
 
 [features]
 # by default Tauri runs in production mode

@@ -44,7 +44,9 @@
         "providerShortName": null,
         "signingIdentity": null
       },
-      "resources": [],
+      "resources": [
+        "noti.mp3"
+      ],
       "shortDescription": "",
       "targets": "all",
       "windows": {

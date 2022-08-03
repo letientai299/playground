@@ -7,13 +7,10 @@ import {
   requestPermission,
 } from '@tauri-apps/api/notification';
 
-import { Event, listen, UnlistenFn } from '@tauri-apps/api/event';
-
-import { fmtDuration, notify, parseDuration } from './util';
-import { timerEvent } from './protocol';
 import { invoke } from '@tauri-apps/api';
-
-const timerFinishedSound = new Audio('/noti.mp3');
+import { Event, listen, UnlistenFn } from '@tauri-apps/api/event';
+import { timerEvent } from './protocol';
+import { fmtDuration, notify, parseDuration } from './util';
 
 function App() {
   const [durationString, setDurationString] = useState('30');
@@ -68,9 +65,9 @@ function App() {
     };
 
     setup();
-
     return () => {
       unlisten();
+      invoke('stop_countdown', { id: listenerId }).then();
     };
   }, [running]);
 
@@ -79,7 +76,6 @@ function App() {
     if (canNotify) {
       notify(durationString);
     }
-    timerFinishedSound.play().then();
   }
 
   const timeVisual = fmtDuration(remain);
@@ -122,7 +118,6 @@ function App() {
       flex gap-2 flex-col items-center justify-center w-full h-full text-2xl p-8
     "
     >
-      <span>Is running {running ? 'true' : 'false'}</span>
       <input
         type="text"
         className="
