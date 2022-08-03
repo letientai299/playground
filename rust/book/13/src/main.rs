@@ -1,4 +1,5 @@
-use crate::ShirtColor::{Blue, Red};
+use crate::ShirtColor::Blue;
+use crate::ShirtColor::Red;
 
 fn main() {
   #[derive(Debug)]
@@ -28,6 +29,7 @@ fn main() {
   });
 
   let new_list = dbg!(new_list);
+  println!("{:?}", new_list);
 }
 
 #[derive(PartialEq, Debug)]
