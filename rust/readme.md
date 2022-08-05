@@ -1,15 +1,17 @@
 # Learning Rust
 
-Books to read:
+## Books to read
 
-- https://doc.rust-lang.org/rustdoc
 - https://doc.rust-lang.org/rustc
 - https://doc.rust-lang.org/cargo
 - https://nnethercote.github.io/perf-book
 - https://doc.rust-lang.org/nomicon
 - https://rust-unofficial.github.io/too-many-lists
-- https://picklenerd.github.io/pngme_book/chapter_1.html
+- https://picklenerd.github.io/pngme_book
 - https://rust-lang.github.io/async-book
+- https://rust-lang-nursery.github.io/rust-cookbook/
+- https://deterministic.space/elegant-apis-in-rust.html
+- https://rust-unofficial.github.io/patterns/
 
 WIP:
 
@@ -18,3 +20,11 @@ Done
 - [rbe](./rbe): https://doc.rust-lang.org/rust-by-example
   - This should tbe first thing to read, not the Rust book.
 - [book](./book): https://doc.rust-lang.org/book
+- https://doc.rust-lang.org/rustdoc
+- https://rust-lang.github.io/api-guidelines
+  - Use `bitflags ` instead of enum for C-like flag
+  - `debug_asset!` can help with dynamic enforcement for debug build.
+
+## TODO
+
+- [ ] Get back and optimize the project at book chapter 20
