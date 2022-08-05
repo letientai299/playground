@@ -1,6 +1,6 @@
 # Code and note for The Rust Book
 
-https://doc.rust-lang.org/book/ch01-01-installation.html
+https://doc.rust-lang.org/book
 
 ## The Rust Programming Language
 
@@ -108,7 +108,7 @@ Done
 
 - [x] 6.1. Defining an Enum
 - [x] 6.2. The match Control Flow Construct
-- [ ] 6.3. Concise Control Flow with if let
+- [x] 6.3. Concise Control Flow with if let
 
 ## 7. Managing Growing Projects with Packages, Crates, and Modules
 
@@ -216,59 +216,98 @@ Done
 
 - [x] 14.1. Customizing Builds with Release Profiles
 - [x] 14.2. Publishing a Crate to Crates.io
-- [ ] 14.3. Cargo Workspaces
+- [x] 14.3. Cargo Workspaces
   - Workspaces: set of packages share same `Cargo.lock` and output dir.
 - [x] 14.4. Installing Binaries from Crates.io with cargo install
 - [x] 14.5. Extending Cargo with Custom Commands
 
 ## 15. Smart Pointers
 
-- [ ] 15.1. Using Box<T> to Point to Data on the Heap
-- [ ] 15.2. Treating Smart Pointers Like Regular References with the Deref Trait
-- [ ] 15.3. Running Code on Cleanup with the Drop Trait
-- [ ] 15.4. Rc<T>, the Reference Counted Smart Pointer
-- [ ] 15.5. RefCell<T> and the Interior Mutability Pattern
-- [ ] 15.6. Reference Cycles Can Leak Memory
+- [x] 15.1. Using Box<T> to Point to Data on the Heap
+  - Use `Box` for storing data of unknown size in heap, or when need transfer
+    ownership but don't want to copy.
+- [x] 15.2. Treating Smart Pointers Like Regular References with the Deref Trait
+  - When `Deref` is defined for involved type, Rust will analyze the types
+    andauto `deref` as many times as needed to get a good reference that matches
+    param type.
+- [x] 15.3. Running Code on Cleanup with the Drop Trait
+  - Variables are dropped in reverse order of their creation.
+  - Drop value early with `mem::drop`, can't call the `.drop()` method directly.
+- [x] 15.4. Rc<T>, the Reference Counted Smart Pointer
+  - Use `Rc::clone()` as a convention to visual distinguish with deep clone.
+- [x] 15.5. RefCell<T> and the Interior Mutability Pattern
+
+  - **Interior Mutability Pattern**: allow mutate data even when there's
+    immutable reference.
+  - With `RefCell`, the rules are **enforced as runtime**.
+
+- [x] 15.6. Reference Cycles Can Leak Memory
+  - All of this chapter just means that building a C-like tree or list structure
+    in Rust is very hard.
 
 ## 16. Fearless Concurrency
 
-- [ ] 16.1. Using Threads to Run Code Simultaneously
-- [ ] 16.2. Using Message Passing to Transfer Data Between Threads
-- [ ] 16.3. Shared-State Concurrency
-- [ ] 16.4. Extensible Concurrency with the Sync and Send Traits
+- [x] 16.1. Using Threads to Run Code Simultaneously
+  - Thread in Rust are 1:1, means 1 Rust thread is 1 OS thread.
+- [x] 16.2. Using Message Passing to Transfer Data Between Threads
+- [x] 16.3. Shared-State Concurrency
+  - In other words, any type `T` is `Sync` if `&T` (an immutable reference to
+    `T`) is `Send`
+  - Implementing `Send` and `Sync` manually Is **unsafe**
+- [x] 16.4. Extensible Concurrency with the Sync and Send Traits
 
 ## 17. Object Oriented Programming Features of Rust
 
-- [ ] 17.1. Characteristics of Object-Oriented Languages
-- [ ] 17.2. Using Trait Objects That Allow for Values of Different Types
-- [ ] 17.3. Implementing an Object-Oriented Design Pattern
+- [x] 17.1. Characteristics of Object-Oriented Languages
+- [x] 17.2. Using Trait Objects That Allow for Values of Different Types
+- [x] 17.3. Implementing an Object-Oriented Design Pattern
 
 ## 18. Patterns and Matching
 
-- [ ] 18.1. All the Places Patterns Can Be Used
-- [ ] 18.2. Refutability: Whether a Pattern Might Fail to Match
-- [ ] 18.3. Pattern Syntax
+- [x] 18.1. All the Places Patterns Can Be Used
+  - Function param can be pattern, too.
+- [x] 18.2. Refutability: Whether a Pattern Might Fail to Match
+- [x] 18.3. Pattern Syntax
 
 ## 19. Advanced Features
 
-- [ ] 19.1. Unsafe Rust
-- [ ] 19.2. Advanced Traits
-- [ ] 19.3. Advanced Types
-- [ ] 19.4. Advanced Functions and Closures
-- [ ] 19.5. Macros
+- [x] 19.1. Unsafe Rust
+
+  - Use `pub extern` with `#[no_mangle]` to expose a function for other language
+    to call
+
+  ```rust
+  #[no_mangle]
+  pub extern "C" fn call_from_c() {...}
+  ```
+
+- [x] 19.2. Advanced Traits
+- [x] 19.3. Advanced Types
+- [x] 19.4. Advanced Functions and Closures
+  - A trait bound on `?Sized` means ""`T` may or may not be `Sized`". `?` syntax
+    like this is only available for `Sized`.
+  - Can't return closure directly, must use `Box::new(<closure>)`.
+  - `macro_rules!` will be deprecated in future.
+- [x] 19.5. Macros
+  - Very advanced topic and isn't covered in great detail in the book. But, it's
+    too soon to learn to implement all these macro anyway.
 
 ## 20. Final Project: Building a Multithreaded Web Server
 
-- [ ] 20.1. Building a Single-Threaded Web Server
-- [ ] 20.2. Turning Our Single-Threaded Server into a Multithreaded Server
-- [ ] 20.3. Graceful Shutdown and Cleanup
+- [x] 20.1. Building a Single-Threaded Web Server
+- [x] 20.2. Turning Our Single-Threaded Server into a Multithreaded Server
+- [x] 20.3. Graceful Shutdown and Cleanup
+
+My attempt to use multi channels (one per worker) is terribly slow and full of
+issue. Still don't know why. But let's continue learn Rust via other resources
+first.
 
 ## 21. Appendix
 
-- [ ] 21.1. A - Keywords
+- [x] 21.1. A - Keywords
 - [x] 21.2. B - Operators and Symbols
 - [x] 21.3. C - Derivable Traits
-- [ ] 21.4. D - Useful Development Tools
-- [ ] 21.5. E - Editions
-- [ ] 21.6. F - Translations of the Book
-- [ ] 21.7. G - How Rust is Made and “Nightly Rust”
+- [x] 21.4. D - Useful Development Tools
+- [x] 21.5. E - Editions
+- [x] 21.6. F - Translations of the Book
+- [x] 21.7. G - How Rust is Made and “Nightly Rust”

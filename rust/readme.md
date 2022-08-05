@@ -13,9 +13,8 @@ Books to read:
 
 WIP:
 
-- [book](./book): https://doc.rust-lang.org/book
-
 Done
 
 - [rbe](./rbe): https://doc.rust-lang.org/rust-by-example
   - This should tbe first thing to read, not the Rust book.
+- [book](./book): https://doc.rust-lang.org/book
