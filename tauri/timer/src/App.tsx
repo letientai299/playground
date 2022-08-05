@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaPause, FaPlay, FaUndo } from 'react-icons/fa';
+import { FaPause, FaPlay } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -96,7 +96,6 @@ function App() {
     setRunning((v) => !v);
   };
 
-  const reset = () => setRemain(parseDuration(durationString));
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key != 'Enter') {
@@ -114,17 +113,17 @@ function App() {
       dark:bg-slate-900
       dark:text-white
       flex gap-2 flex-col items-center justify-center w-full h-full text-2xl p-8
-    "
+      "
     >
       <input
         type="text"
         className="
-          dark:bg-slate-100
-          dark:text-slate-800
-          border-blue-300
-          border-2
-          focus:bg-white
-          text-center rounded-lg w-full p-1"
+        dark:bg-slate-100
+        dark:text-slate-800
+        border-blue-300
+        border-2
+        focus:bg-white
+        text-center rounded-lg w-full p-1"
         placeholder="Duration: 10m, 30s, ..."
         autoFocus
         value={durationString}
@@ -132,27 +131,15 @@ function App() {
         onKeyDown={onKeyDown}
       />
 
-      <div className="grid grid-cols-2 gap-1 w-full justify-center text-white">
-        <button
-          className={'bg-blue-500 focus:bg-blue-700 rounded-lg p-1'}
-          onClick={start}
-        >
-          <div className="flex justify-center items-center pl-2">
-            {running ? <FaPause /> : <FaPlay />}
-            <span className={'flex-grow'}>{startButtonText}</span>
-          </div>
-        </button>
-
-        <button
-          className={'bg-orange-500 focus:bg-orange-700 rounded-lg p-1'}
-          onClick={reset}
-        >
-          <div className="flex justify-center items-center pl-2">
-            <FaUndo />
-            <span className={'flex-grow'}>Reset</span>
-          </div>
-        </button>
-      </div>
+      <button
+        className={'bg-blue-500 focus:bg-blue-700 rounded-lg p-1 w-full'}
+        onClick={start}
+      >
+        <div className="flex justify-center items-center pl-2">
+          {running ? <FaPause /> : <FaPlay />}
+          <span className={'flex-grow'}>{startButtonText}</span>
+        </div>
+      </button>
 
       <div
         className="
