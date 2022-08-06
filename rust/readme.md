@@ -6,7 +6,6 @@
 - https://doc.rust-lang.org/cargo
 - https://nnethercote.github.io/perf-book
 - https://doc.rust-lang.org/nomicon
-- https://rust-unofficial.github.io/too-many-lists
 - https://picklenerd.github.io/pngme_book
 - https://rust-lang.github.io/async-book
 - https://rust-lang-nursery.github.io/rust-cookbook/
@@ -14,6 +13,8 @@
 - https://rust-unofficial.github.io/patterns/
 
 WIP:
+
+- [lists](./lists): https://rust-unofficial.github.io/too-many-lists
 
 Done
 
