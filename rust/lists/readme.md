@@ -17,3 +17,8 @@ https://rust-unofficial.github.io/too-many-lists
   let ref1 = &mut data;
   let ref2 = &mut *ref1;
   ```
+
+- By default, panics are unwinding. Unwinding is just a fancy way to say "make
+  every single function immediately return"... then, every Destructor will run.
+  Except that panic can be caught. So, either way, code can still run afte
+  panic. Thus, data managed by `unsafe` code can be corrupted.
