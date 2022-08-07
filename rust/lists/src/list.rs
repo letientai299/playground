@@ -117,7 +117,10 @@ mod tests {
         list.push(3);
         let top = list.peek_mut();
         assert_eq!(top, Some(&mut 3));
-        top.map(|v| *v = 20);
+        top.map(|v| {
+            *v = 20;
+            v
+        });
         assert_eq!(list.peek(), Some(&20));
     }
 
@@ -153,7 +156,7 @@ mod tests {
     #[test]
     fn iter() {
         let list = vec![1, 2, 3];
-        let values: Vec<i32> = list.iter().map(|&v| v).collect();
+        let values: Vec<i32> = list.to_vec();
         assert_eq!(values, vec![1, 2, 3]);
     }
 
@@ -163,7 +166,7 @@ mod tests {
         for v in list.iter_mut() {
             *v *= 10;
         }
-        let values: Vec<i32> = list.iter().map(|&v| v).collect();
+        let values: Vec<i32> = list.to_vec();
         assert_eq!(values, vec![10, 20, 30]);
     }
 }

@@ -40,11 +40,12 @@ impl<T> LinkedList<T> {
 
     fn push_front(&mut self, v: T) {
         unsafe {
-            let mut new = NonNull::new_unchecked(Box::into_raw(Box::new(Node {
-                front: None,
-                back: None,
-                elem: v,
-            })));
+            let mut new =
+                NonNull::new_unchecked(Box::into_raw(Box::new(Node {
+                    front: None,
+                    back: None,
+                    elem: v,
+                })));
 
             if let Some(old) = self.front.take() {
                 (*old.as_ptr()).front = Some(new);

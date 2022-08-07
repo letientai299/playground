@@ -3,7 +3,6 @@
 ## Books to read
 
 - https://doc.rust-lang.org/rustc
-- https://doc.rust-lang.org/cargo
 - https://nnethercote.github.io/perf-book
 - https://doc.rust-lang.org/nomicon
 - https://picklenerd.github.io/pngme_book
@@ -14,7 +13,7 @@
 
 WIP:
 
-- [lists](./lists): https://rust-unofficial.github.io/too-many-lists
+- [cargo](./cargo): https://doc.rust-lang.org/cargo
 
 Done
 
@@ -25,6 +24,7 @@ Done
 - https://rust-lang.github.io/api-guidelines
   - Use `bitflags ` instead of enum for C-like flag
   - `debug_asset!` can help with dynamic enforcement for debug build.
+- [lists](./lists): https://rust-unofficial.github.io/too-many-lists
 
 ## TODO
 
