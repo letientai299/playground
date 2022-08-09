@@ -13,8 +13,6 @@
 
 WIP:
 
-- [cargo](./cargo): https://doc.rust-lang.org/cargo
-
 Done
 
 - [rbe](./rbe): https://doc.rust-lang.org/rust-by-example
@@ -25,6 +23,8 @@ Done
   - Use `bitflags ` instead of enum for C-like flag
   - `debug_asset!` can help with dynamic enforcement for debug build.
 - [lists](./lists): https://rust-unofficial.github.io/too-many-lists
+
+- [cargo](./cargo): https://doc.rust-lang.org/cargo, just skimming through
 
 ## TODO
 
