@@ -20,3 +20,10 @@ export const parseDuration = (s: string) => {
   s = refineDuration(s);
   return parse(s) / 1000;
 };
+
+export const fmtTime = (d: Date) => {
+  const h = d.getHours();
+  const m = d.getMinutes();
+  const s = d.getSeconds();
+  return `${leftPad2(h)}:${leftPad2(m)}:${leftPad2(s)}`;
+}

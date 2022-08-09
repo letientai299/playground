@@ -10,12 +10,13 @@ import {
 import { invoke } from '@tauri-apps/api';
 import { Event, listen, UnlistenFn } from '@tauri-apps/api/event';
 import { timerEvent } from './protocol';
-import { fmtDuration, parseDuration, refineDuration } from './util';
+import { fmtDuration, fmtTime, parseDuration, refineDuration } from './util';
 
 function App() {
   const [durationString, setDurationString] = useState('30');
   const [remain, setRemain] = useState(0);
   const [running, setRunning] = useState(false);
+  const [endAt, setEndAt] = useState<Date>(new Date(0));
 
   // simply check for notification permission on startup.
   // the actual notification will be done in the Rust side.
@@ -90,10 +91,23 @@ function App() {
   }
 
   const start = async () => {
-    if (remain === 0) {
+    let nextRemain = remain;
+
+    if (nextRemain === 0) {
+      nextRemain = parseDuration(durationString)
       setRemain(parseDuration(durationString));
     }
-    setRunning((v) => !v);
+
+    if (!running) {
+      const now = new Date();
+      const endTime = now.getTime() + nextRemain*1000;
+      const end = new Date(endTime);
+      console.log("start: ", new Date());
+      console.log("end: ", end);
+      setEndAt(end);
+    }
+
+    setRunning(!running);
   };
 
 
@@ -149,6 +163,16 @@ function App() {
         {[...timeVisual].map((c, i) => (
           <div key={i}>{c}</div>
         ))}
+      </div>
+      <div className='font-mono text-sm'>
+        {
+          endAt.getTime() == 0
+            ? "Enter duration and press Start"
+            : <>
+                {running ? "Timer will end at" : "Finished at"}
+                <time dateTime={endAt.toLocaleString()}> {fmtTime(endAt)} </time>
+              </>
+        }
       </div>
     </div>
   );
