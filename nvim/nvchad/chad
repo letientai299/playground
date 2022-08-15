@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+# Put the dotfile location into path
+SCRIPT_PATH=$(dirname $(realpath -s $0))
+
+cd $SCRIPT_PATH &&
+  docker build -q -t nvchad . >/dev/null &&
+  cd - >/dev/null
+
+docker run -v $PWD:/work \
+  -v$SCRIPT_PATH/custom:/root/.config/nvim/lua/custom \
+  -it --rm nvchad "$@"
