@@ -2,16 +2,12 @@
 
 ## Books to read
 
-- https://doc.rust-lang.org/rustc
 - https://nnethercote.github.io/perf-book
-- https://doc.rust-lang.org/nomicon
-- https://picklenerd.github.io/pngme_book
-- https://rust-lang.github.io/async-book
-- https://rust-lang-nursery.github.io/rust-cookbook/
-- https://deterministic.space/elegant-apis-in-rust.html
-- https://rust-unofficial.github.io/patterns/
 
 WIP:
+
+- https://rust-unofficial.github.io/patterns/
+- [tokie `mini-redis` tutorial](./mini-redis): https://tokio.rs/tokio/tutorial
 
 Done
 

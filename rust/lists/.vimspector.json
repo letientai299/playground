@@ -1,0 +1,22 @@
+{
+  "$schema": "https://puremourning.github.io/vimspector/schema/vimspector.schema.json",
+  "configurations": {
+    "launch": {
+      "adapter": "CodeLLDB",
+      "configuration": {
+        "type": "lldb",
+        "filetypes": ["rust"],
+        "request": "launch",
+        "program": "${Executable}",
+        "args": ["*${Args}"],
+        "cwd": "${workspaceRoot}",
+        "environment": [],
+        "stopAtEntry": false,
+        "MIMode": "lldb",
+        "logging": {
+          "engineLogging": false
+        }
+      }
+    }
+  }
+}
