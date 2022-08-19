@@ -4,7 +4,7 @@
 SCRIPT_PATH=$(dirname $(realpath -s $0))
 
 cd $SCRIPT_PATH &&
-  docker build -q -t nvchad . >/dev/null &&
+  docker build -t nvchad . &&
   cd - >/dev/null
 
 docker run -v $PWD:/work \

@@ -6,7 +6,34 @@ local M = {}
 -- example of changing theme:
 
 M.ui = {
-  theme = "tokyodark",
+  theme = "tokyonight",
+}
+
+M.plugins = {
+   ["williamboman/mason.nvim"] = {
+      ensure_installed = {
+        -- lua stuff
+        "lua-language-server",
+        "stylua",
+
+        -- web dev
+        "css-lsp",
+        "html-lsp",
+        "typescript-language-server",
+        "deno",
+        "emmet-ls",
+        "json-lsp",
+
+        -- shell
+        "shfmt",
+        "shellcheck",
+
+        -- go
+
+        -- rust
+        ["rust-analyzer"] = {}
+      },
+    },
 }
 
 return M
