@@ -1,11 +1,22 @@
 {
   "$schema": "https://puremourning.github.io/vimspector/schema/vimspector.schema.json",
+  "adapters": {
+    "rust-lldb": {
+      "extends": "CodeLLDB",
+      "configuration": {
+        "filetypes": ["rust"],
+        "sourceLanguages": ["rust"],
+        "sourceMap": {
+          "/rustc/4b91a6ea7258a947e59c6522cd5898e7c0a6a88f": "/Users/tai.le/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust"
+        }
+      }
+    }
+  },
   "configurations": {
     "launch": {
-      "adapter": "CodeLLDB",
+      "adapter": "rust-lldb",
       "configuration": {
         "type": "lldb",
-        "filetypes": ["rust"],
         "request": "launch",
         "program": "${Executable}",
         "args": ["*${Args}"],
