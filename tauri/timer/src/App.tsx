@@ -94,22 +94,21 @@ function App() {
     let nextRemain = remain;
 
     if (nextRemain === 0) {
-      nextRemain = parseDuration(durationString)
+      nextRemain = parseDuration(durationString);
       setRemain(parseDuration(durationString));
     }
 
     if (!running) {
       const now = new Date();
-      const endTime = now.getTime() + nextRemain*1000;
+      const endTime = now.getTime() + nextRemain * 1000;
       const end = new Date(endTime);
-      console.log("start: ", new Date());
-      console.log("end: ", end);
+      console.log('start: ', new Date());
+      console.log('end: ', end);
       setEndAt(end);
     }
 
     setRunning(!running);
   };
-
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key != 'Enter') {
@@ -164,15 +163,15 @@ function App() {
           <div key={i}>{c}</div>
         ))}
       </div>
-      <div className='font-mono text-sm'>
-        {
-          endAt.getTime() == 0
-            ? "Enter duration and press Start"
-            : <>
-                {running ? "Timer will end at" : "Finished at"}
-                <time dateTime={endAt.toLocaleString()}> {fmtTime(endAt)} </time>
-              </>
-        }
+      <div className="font-mono text-sm">
+        {endAt.getTime() == 0 ? (
+          'Enter duration and press Start'
+        ) : (
+          <>
+            {running ? 'Timer will end at' : 'Finished at'}
+            <time dateTime={endAt.toLocaleString()}> {fmtTime(endAt)} </time>
+          </>
+        )}
       </div>
     </div>
   );
