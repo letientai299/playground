@@ -1,0 +1,6 @@
+HOST: http://localhost:8080
+
+GET {{HOST}}/list/Users/tai.le/.config
+GET {{HOST}}/list/usr/local/bin
+GET {{HOST}}/list/usr/local
+
