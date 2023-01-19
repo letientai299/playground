@@ -91,6 +91,7 @@ async fn start_countdown(
 }
 
 fn main() {
+    println!("hello world some");
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![start_countdown, stop_countdown])
         .run(tauri::generate_context!())
