@@ -1,9 +1,14 @@
-FROM alpine:edge
+FROM golang:latest
 WORKDIR /work
 
-RUN apk update
-RUN apk add git nodejs neovim fd ripgrep npm alpine-sdk rustup unzip curl wget
-RUN rustup-init --default-toolchain nightly -y
+RUN apt-get update -yqq && \
+  apt-get install -yqq \
+  git unzip wget curl ripgrep fd-find \
+  ninja-build gettext libtool-bin cmake g++ pkg-config
+
 RUN git clone --depth=1 https://github.com/NvChad/NvChad /root/.config/nvim
+
+RUN git clone --depth=1 https://github.com/neovim/neovim /root/.src/nvim && \
+  cd /root/.src/nvim && make install
 
 ENTRYPOINT ["nvim"]

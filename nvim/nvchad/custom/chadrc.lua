@@ -10,30 +10,20 @@ M.ui = {
 }
 
 M.plugins = {
-   ["williamboman/mason.nvim"] = {
-      ensure_installed = {
-        -- lua stuff
-        "lua-language-server",
-        "stylua",
-
-        -- web dev
-        "css-lsp",
-        "html-lsp",
-        "typescript-language-server",
-        "deno",
-        "emmet-ls",
-        "json-lsp",
-
-        -- shell
-        "shfmt",
-        "shellcheck",
-
-        -- go
-
-        -- rust
-        ["rust-analyzer"] = {}
-      },
+  ["williamboman/mason.nvim"] = {
+    ensure_installed = {
+      -- lua stuff
+      "lua-language-server",
+      "stylua",
+      -- web dev
+      "json-lsp",
+      -- shell
+      "shfmt",
+      "shellcheck",
+      -- go
+      ["gopls"] = {}
     },
+  },
 }
 
 return M

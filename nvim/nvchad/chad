@@ -3,10 +3,20 @@
 # Put the dotfile location into path
 SCRIPT_PATH=$(dirname $(realpath -s $0))
 
+DK=docker
+NVCHAD_VOLUME=$HOME/.cache/nvchad_volume
+mkdir -p $NVCHAD_VOLUME/{cache,local}
+
+if command -v podman >/dev/null 2>&1; then
+  DK=podman
+fi
+
 cd $SCRIPT_PATH &&
-  docker build -t nvchad . &&
+  $DK build --quiet -t nvchad . > /dev/null &&
   cd - >/dev/null
 
-docker run -v $PWD:/work \
-  -v$SCRIPT_PATH/custom:/root/.config/nvim/lua/custom \
+$DK run --quiet -v $PWD:/work \
+  -v $SCRIPT_PATH/custom:/root/.config/nvim/lua/custom \
+  --mount type=bind,src=$NVCHAD_VOLUME/cache,target=/root/.cache \
+  --mount type=bind,src=$NVCHAD_VOLUME/local,target=/root/.local \
   -it --rm nvchad "$@"
