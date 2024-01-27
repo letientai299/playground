@@ -30,7 +30,7 @@ Done
 
 ## 3. Common Programming Concepts
 
-- File name in rust can have `.`, i.e. `3.1.code.rs` is invalid name.
+- File name in rust can't have `.`, i.e. `3.1.code.rs` is invalid name.
 
 - [x] 3.1. Variables and Mutability
   - `let`: immutable var _by default_, can use `let mut` to have mutable var
